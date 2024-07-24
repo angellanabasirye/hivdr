@@ -41,7 +41,7 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>  
             <li class="nav-item ">
-                <a class="nav-link" href="@{{route('drresults.index')}}">
+                <a class="nav-link" href="/drug_resistance">
                     <i class="nc-icon nc-notes"></i>
                     <p> HIV-DR Results</p>
                 </a>

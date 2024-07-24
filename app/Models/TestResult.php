@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EligibleSample;
+use App\Models\DrugResistance;
+use App\Models\ViralLoad;
 use App\Models\Patient;
 use App\Observers\TestResultObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -39,13 +41,15 @@ class TestResult extends Model
     protected $fillable = [
         'patient_id',
         'eligible_sample_id',
-        'test_type', // viral_load, drug resistance etc
+        // 'test_type', // viral_load, drug resistance etc
+        'vl_id',
         'vl_lab_id',
         'vl_copies',
         'vl_indication_id',
         'vl_adherence',
         'vl_test_date',
-        'dr_vl_result_id', // viral load test id that prompted the drug resistance test
+        'dr_id',
+        'dr_lab_id',
         'dr_lab_sample_no',
         'dr_indication_id',
         'rtpr_or_inti',
@@ -55,6 +59,7 @@ class TestResult extends Model
         'rt_codons',
         'pr_codons',
         'rt_sub_type',
+        'date_collected',
     ];
 
 
@@ -66,5 +71,15 @@ class TestResult extends Model
     public function eligible_sample()
     {
         return $this->belongsTo(EligibleSample::class);
+    }
+
+    public function drug_resistance()
+    {
+        return $this->belongsTo(DrugResistance::class, 'dr_id');
+    }
+
+    public function viral_load()
+    {
+        return $this->belongsTo(ViralLoad::class, 'vl_id');
     }
 }

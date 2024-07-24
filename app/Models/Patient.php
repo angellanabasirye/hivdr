@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EligibleSample;
+use App\Models\SocialProfile;
 use App\Models\TestResult;
 use App\Models\Facility;
+use App\Models\IAC;
+use Carbon\Carbon;
 
 class Patient extends Model
 {
@@ -41,16 +44,42 @@ class Patient extends Model
 
     public function vl_test_results()
     {
-        return $this->hasMany(TestResult::class)->where('test_type', 'viral load');
+        return $this->hasMany(TestResult::class)->orderBy('vl_test_date', 'desc');
     }
 
     public function dr_test_results()
     {
-        return $this->hasMany(TestResult::class)->where('test_type', 'drug resistance');
+        return $this->hasMany(TestResult::class)->whereNotNull('dr_id')->orderBy('vl_test_date', 'desc');
     }
 
     public function facility()
     {
         return $this->belongsTo(Facility::class);
+    }
+
+    public function iacs()
+    {
+        return $this->hasMany(IAC::class)->orderBy('iac_date', 'desc');
+    }
+
+    public function social_profiles()
+    {
+        return $this->hasMany(SocialProfile::class)->orderBy('profile_date', 'desc');
+    }
+
+    public function getAge()
+    {
+        $age = Carbon::parse($this->birthdate)->diff(Carbon::now())->format('%y yrs %m mths');
+        return $age;
+    }
+
+    public function vl_before_iac()
+    {
+        $iac = IAC::where('patient_id', $this->id)->first();
+        if ($iac) {
+            $vl_before_iac = TestResult::where('patient_id', $this->id)->where('vl_test_date', '>', $iac->iac_date)->first();
+            return $vl_before_iac;
+        }
+        return null;
     }
 }

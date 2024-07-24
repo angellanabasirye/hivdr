@@ -21,5 +21,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('users', App\Http\Controllers\UserController::class);
 Route::resource('patients', App\Http\Controllers\PatientController::class);
 Route::resource('eligible_samples', App\Http\Controllers\EligibleSampleController::class);
+Route::resource('drug_resistance', App\Http\Controllers\DrugResistanceController::class);
 
 require __DIR__.'/auth.php';

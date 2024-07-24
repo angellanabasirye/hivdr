@@ -34,6 +34,12 @@ class DatabaseSeeder extends Seeder
         $this->call(PatientSeeder::class);
         $this->call(BatchSeeder::class);
         $this->call(EligibleSampleSeeder::class);
+        $this->call(ViralLoadSeeder::class);
+        $this->call(DrugResistanceSeeder::class);
         $this->call(TestResultSeeder::class);
+        $this->call(ResistanceSeeder::class);
+        $this->call(PssIssueSeeder::class);
+        $this->call(IACSeeder::class);
+        $this->call(SocialProfileSeeder::class);
     }
 }

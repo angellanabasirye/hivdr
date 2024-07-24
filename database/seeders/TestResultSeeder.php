@@ -23,7 +23,7 @@ class TestResultSeeder extends Seeder
                 TestResult::create([
                     'patient_id' => $data[2],
                     'eligible_sample_id' => EligibleSample::where('eligible_sample_no', $data[4])->first()->id ?? NULL,
-                    'test_type' => $data[22] == null ? 'viral_load' : 'drug_resistance',// viral_load, drug resistance etc
+                    // 'test_type' => $data[22] == null ? 'viral_load' : 'drug_resistance',// viral_load, drug resistance etc
                     'vl_id' => $data[0], // viral load test id that prompted the drug resistance test
                     'vl_lab_id' => $data[6],
                     'vl_copies' => $data[9],
@@ -31,15 +31,17 @@ class TestResultSeeder extends Seeder
                     'vl_adherence' => $data[13],
                     'vl_test_date' => empty($data[8]) ? NULL : Carbon::parse($data[8])->toDateString(),
                     'dr_id' => empty($data[22]) ? NULL : $data[22],
+                    'dr_lab_id' => empty($data[24]) ? NULL : $data[24],
                     'dr_lab_sample_no' => empty($data[25]) ? NULL : $data[25],
                     'dr_indication_id' => empty($data[17]) ? NULL : $data[17],
-                    'rtpr_or_inti' => $data[26],
-                    'is_amplified' => $data[27],
+                    'rtpr_or_inti' => empty($data[26]) ? NULL : $data[26],
+                    'is_amplified' => empty($data[27]) ? NULL : $data[27],
                     'dr_test_date' => empty($data[28]) ? NULL : Carbon::parse($data[28])->toDateString(),
                     'release_date' => empty($data[29]) ? NULL : Carbon::parse($data[29])->toDateString(),
-                    'rt_codons' => $data[30],
-                    'pr_codons' => $data[31],
-                    'rt_sub_type' => $data[32],
+                    'rt_codons' => empty($data[30]) ? NULL : $data[30],
+                    'pr_codons' => empty($data[31]) ? NULL : $data[31],
+                    'rt_sub_type' => empty($data[32]) ? NULL : $data[32],
+                    'date_collected' => empty($data[33]) ? NULL : Carbon::parse($data[33])->toDateString()
                 ]);    
             }
             $firstline = false;

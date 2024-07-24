@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
+use App\Models\PssIssue;
 use App\Models\Patient;
 
 class PatientController extends Controller
@@ -38,7 +39,9 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //
+        $patient_vl_before_iac = $patient->vl_before_iac();
+        $pss_issues = PssIssue::all();
+        return view('patients.show', compact('patient', 'patient_vl_before_iac', 'pss_issues'));
     }
 
     /**
