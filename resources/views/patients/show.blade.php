@@ -69,7 +69,7 @@
                             <div class="col-md-6">  
                                 <div class="panel panel-info">  <!-- Patient Details -->
                                     <div class="panel-heading" style="padding: 3px; margin-bottom: 5px;">
-                                        <h3 class="panel-title">ART Profile 
+                                        <h3 class="panel-title">Medical Profile 
                                             <a class=" view_profile" id="view-{{$patient->id}}-link"
                                                href="{{ route('patients.show', array($patient->id)) }}"
                                                style="padding: 3px;" rel="tooltip" title="Edit ART Profile">
@@ -170,7 +170,10 @@
                                                     <p>
                                                         Viral load result before IAC initiation (Copies/ml):&nbsp;&nbsp;&nbsp;
                                                         <strong> {{ $patient_vl_before_iac->vl_copies ?? '' }} </strong>&nbsp;&nbsp;&nbsp;
-                                                        Tested on:&nbsp;&nbsp;&nbsp;<strong>{{ date('dS M Y', strtotime($patient_vl_before_iac->vl_test_date)) ?? '' }}</strong>
+                                                        Tested on:&nbsp;&nbsp;&nbsp;
+                                                        <strong>
+                                                        {{ $patient_vl_before_iac ? date('dS M Y', strtotime($patient_vl_before_iac->vl_test_date)) : '' }}
+                                                        </strong>
                                                     </p>
                                                 </div>
                                             </div>
@@ -189,6 +192,22 @@
                                                                     <th data-field="actions" class="td-actions ">Actions</th>
                                                                 </thead>
                                                                 <tbody>
+                                                                    @foreach($patient->patient_regimens as $p_regimen)
+                                                                    <tr>
+                                                                        <td>{{ $p_regimen->regimen_old->treatment_line }}</td>
+                                                                        <td>
+                                                                            {{ $p_regimen->regimen_duration() ?? 'update ART history' }}
+                                                                        </td>
+                                                                        <td>{{ $p_regimen->regimen_old->regimen_name }}</td>
+                                                                        <td>
+                                                                            {{ $p_regimen->start_date ? date('dS M Y', strtotime($p_regimen->start_date)) : 'update ART history' }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ $p_regimen->stop_date ? date('dS M Y', strtotime($p_regimen->stop_date)) : 'current regimen' }}
+                                                                        </td>
+                                                                        <td>{{ $p_regimen->regimen_change()->reasons ?? '' }} {{ $p_regimen->regimen_change()->comment ?? '' }}</td>
+                                                                    </tr>
+                                                                    @endforeach
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -270,8 +289,12 @@
                                                                 <tbody>
                                                                     @foreach($patient->vl_test_results as $vl)
                                                                         <tr>
-                                                                            <td>{{ date('dS M Y', strtotime($vl->date_collected)) }}</td>
-                                                                            <td>{{ date('dS M Y', strtotime($vl->vl_test_date)) }}</td>
+                                                                            <td>
+                                                                                {{ $vl->date_collected ? date('dS M Y', strtotime($vl->date_collected)) : '' }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $vl->vl_test_date ? date('dS M Y', strtotime($vl->vl_test_date)) : '' }}
+                                                                            </td>
                                                                             <td>{{ $patient->regimen }}</td>
                                                                             <td>{{ $patient->treatment_line }}</td>
                                                                             <td>{{ $vl->vl_copies == 1 ? 'Not detectable' : $vl->vl_copies }}</td>
@@ -361,6 +384,48 @@
                                                 <i class="fa fa-plus"></i>                                        
                                             </a>
                                         </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="container-fluid">                                 
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card bootstrap-table">
+                                                        <div class="card-body table-full-width">
+                                                            <table id="table" class="table text-left" >
+                                                                <thead>                                                                             
+                                                                    <th data-field="iac_date">Assessment Date</th>
+                                                                    @foreach($patient->assessments as $assessment)
+                                                                        <th>{{ date('dS M Y', strtotime($assessment->assessment_date)) }}</th>
+                                                                    @endforeach
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach($assessment_headers as $thead => $tvalue)
+                                                                    <tr>
+                                                                        <th>{{ $thead }}</th>
+                                                                        @foreach($patient->assessments as $assessment)
+                                                                            @if($thead == 'CD4 Date' || $thead == 'CrAg Date' || $thead == 'TBLAM Date' || $thead == 'Date Weight/MUAC taken' || $thead == 'Date Added')
+                                                                                <td>
+                                                                                    {{ date('dS M Y', strtotime($assessment->$tvalue)) }}
+                                                                                </td>
+                                                                            @elseif($thead == 'Recent VL Date')
+                                                                                <td>
+                                                                                    {{ date('dS M Y', strtotime($assessment->viral_load->vl_test_date)) }}
+                                                                                </td>
+                                                                            @elseif($thead == 'VL Copies')
+                                                                                <td>{{ $assessment->viral_load->vl_copies }}</td>
+                                                                            @else
+                                                                                <td>{{ $assessment->$tvalue }}</td>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -26,7 +26,7 @@ class DrugResistanceSeeder extends Seeder
                     'patient_id' => $data[4],
                     'test_result_id' => NULL,
                     'suggested_by_clinician' => empty($data[5]) ? NULL : $data[5],
-                    'suggestion_date' => empty($data[6]) ? NULL : $data[6],
+                    'suggestion_date' => empty($data[6]) ? NULL : Carbon::parse($data[6])->toDateString(),
                     'suggested_regimen' => empty($data[7]) ? NULL : $data[7],
                     'suggested_comment' => empty($data[8]) ? NULL : $data[8],
                     'suggested_regimen_change_reason' => empty($data[9]) ? NULL : $data[9],

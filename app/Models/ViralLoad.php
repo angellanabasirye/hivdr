@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EligibleSample;
+use App\Models\Assessment;
 use App\Models\TestResult;
 use App\Models\Patient;
 
@@ -31,5 +32,15 @@ class ViralLoad extends Model
     public function eligible_sample()
     {
         return $this->belongsTo(EligibleSample::class);
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
+
+    public function assessments()
+    {
+        return $this->hasMany(Assessment::class, 'vl_id');
     }
 }

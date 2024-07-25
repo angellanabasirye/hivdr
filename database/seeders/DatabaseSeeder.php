@@ -41,5 +41,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PssIssueSeeder::class);
         $this->call(IACSeeder::class);
         $this->call(SocialProfileSeeder::class);
+        $this->call(RegimenOldSeeder::class);
+        $this->call(PatientRegimenSeeder::class);
+        $this->call(RegimenChangeSeeder::class);
     }
 }

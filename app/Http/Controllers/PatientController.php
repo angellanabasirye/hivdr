@@ -41,7 +41,26 @@ class PatientController extends Controller
     {
         $patient_vl_before_iac = $patient->vl_before_iac();
         $pss_issues = PssIssue::all();
-        return view('patients.show', compact('patient', 'patient_vl_before_iac', 'pss_issues'));
+        $assessment_headers = [
+            'PSS Issues' => 'pss_issues',
+            'Is Stable' => 'stable',
+            'Has AHD' => 'hasAHD',
+            'CD4 Count' => 'CD4',
+            'CD4 Date' => 'CD4_date',
+            'CrAg' => 'crag',
+            'CrAg Date' => 'crag_date',
+            'TBLAM' => 'tbLam',
+            'TBLAM Date' => 'tbLam_date',
+            'Weight (kgs)' => 'weight_kgs',
+            'MUAC' => 'MUAC',
+            'Date Weight/MUAC taken' => 'Weight_MUAC_date',
+            'Regimen' => 'regimen',
+            'Treatment Line' => 'treatment_line',
+            'Recent VL date' => 'vl_test_date',
+            'VL Copies' => 'vl_copies',
+            'Date Added' => 'created_at',
+        ];
+        return view('patients.show', compact('patient', 'patient_vl_before_iac', 'pss_issues', 'assessment_headers'));
     }
 
     /**

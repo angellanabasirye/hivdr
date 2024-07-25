@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EligibleSample;
+use App\Models\PatientRegimen;
+use App\Models\RegimenChange;
 use App\Models\SocialProfile;
+use App\Models\Assessment;
 use App\Models\TestResult;
+use App\Models\ViralLoad;
 use App\Models\Facility;
 use App\Models\IAC;
 use Carbon\Carbon;
@@ -67,6 +71,26 @@ class Patient extends Model
         return $this->hasMany(SocialProfile::class)->orderBy('profile_date', 'desc');
     }
 
+    public function viral_loads()
+    {
+        return $this->hasMany(ViralLoad::class);
+    }
+
+    public function assessments()
+    {
+        return $this->through('viral_loads')->has('assessments')->orderBy('assessment_date', 'desc');
+    }
+
+    public function patient_regimens()
+    {
+        return $this->hasMany(PatientRegimen::class)->orderBy('start_date', 'desc');
+    }
+
+    public function regimen_changes()
+    {
+        return $this->hasMany(RegimenChange::class);
+    }
+
     public function getAge()
     {
         $age = Carbon::parse($this->birthdate)->diff(Carbon::now())->format('%y yrs %m mths');
@@ -77,7 +101,9 @@ class Patient extends Model
     {
         $iac = IAC::where('patient_id', $this->id)->first();
         if ($iac) {
-            $vl_before_iac = TestResult::where('patient_id', $this->id)->where('vl_test_date', '>', $iac->iac_date)->first();
+            $vl_before_iac = TestResult::where('patient_id', $this->id)
+                                ->where('vl_indication_id', 1) // Repeat after IAC
+                                ->first();
             return $vl_before_iac;
         }
         return null;
