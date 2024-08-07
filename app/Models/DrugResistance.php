@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EligibleSample;
+use App\Models\Polymorphism;
 use App\Models\Resistance;
 use App\Models\TestResult;
 use App\Models\ViralLoad;
+use App\Models\DRComment;
 use App\Models\Patient;
 use App\Models\Lab;
 
@@ -38,6 +40,8 @@ class DrugResistance extends Model
         'facility_notified_no_switch',
     ];
 
+    protected $with = ['test_result', 'resistances', 'polymorphisms', 'dr_comments'];
+
     public function dr_lab()
     {
         return $this->belongsTo(Lab::class);
@@ -63,8 +67,18 @@ class DrugResistance extends Model
         return $this->hasOne(TestResult::class, 'dr_id');
     }
 
-    public function resistance()
+    public function resistances()
     {
-        return $this->hasOne(Resistance::class);
+        return $this->hasMany(Resistance::class);
+    }
+
+    public function polymorphisms()
+    {
+        return $this->hasMany(Polymorphism::class);
+    }
+
+    public function dr_comments()
+    {
+        return $this->hasMany(DRComment::class);
     }
 }

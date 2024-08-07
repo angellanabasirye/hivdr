@@ -20,8 +20,8 @@ class PatientRegimenSeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 PatientRegimen::create([
+                    'id' => $data[0],
                     'patient_id' => empty($data[1]) ? NULL : $data[1],
-                    'art_number' => empty($data[0]) ? NULL : $data[0],
                     'regimen_id' => NULL,
                     'regimen_old_id' => empty($data[2]) ? NULL : $data[2],
                     'start_date' => empty($data[3]) ? NULL : Carbon::parse($data[3])->toDateString(),

@@ -26,8 +26,8 @@ class ResistanceSeeder extends Seeder
                     'drug_name' => $data[4],
                     'resistance_level' => $data[5],
                     'scoring' => empty($data[6]) ? NULL : $data[6],
-                    'mutaions_at_greater_than_20' => empty($data[7]) ? NULL : $data[7],
-                    'mutaions_at_less_than_20' => empty($data[8]) ? NULL : $data[8],
+                    'mutations_at_greater_than_20' => empty($data[7]) ? NULL : $data[7],
+                    'mutations_at_less_than_20' => empty($data[8]) ? NULL : $data[8],
                 ]);    
             }
             $firstline = false;

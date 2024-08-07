@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('regimen_changes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('patient_id')->unsigned();
-            $table->string('art_number');
+            $table->bigInteger('patient_regimen_id')->unsigned();
             $table->bigInteger('from_regimen')->unsigned()->nullable();
             $table->bigInteger('to_regimen')->unsigned()->nullable();
             $table->string('reasons')->nullable();

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('drug_name');
             $table->string('resistance_level');
             $table->float('scoring')->nullable();
-            $table->string('mutaions_at_greater_than_20')->nullable();
-            $table->string('mutaions_at_less_than_20')->nullable();
+            $table->string('mutations_at_greater_than_20')->nullable();
+            $table->string('mutations_at_less_than_20')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -327,45 +327,51 @@
                                         <div class="container-fluid">                                 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-body table-full-width">
-                                                            <table id="table" class="table text-left" >
-                                                                <thead>                                                                             
-                                                                    <th data-field="iac_date" style="width: 90px;">IAC Date</th>
-                                                                    <th data-field="pss_issues">Adherence Barries</th>
-                                                                    <th data-field="action_taken">Action Taken / Pyschological Support Provided</th>
-                                                                    <th data-field="adherence_score" data-sortable="true" style="width: 150px">Adherence Score</th>
-                                                                    <th data-field="actions" class="td-actions ">Actions</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($patient->iacs as $iac)
-                                                                        <tr>
-                                                                            <td>{{ $iac->iac_date }}</td>
-                                                                            <td>
-                                                                                @foreach($pss_issues as $pss_issue)
-                                                                                    @foreach(explode(",", $iac->pss_issues) as $issue)
-                                                                                        @if($pss_issue->id == $issue)
-                                                                                            {{ $pss_issue->issue }}<br>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                @endforeach
-                                                                                @if($iac->other_issues)
-                                                                                    OTHER ISSUES:{{ $iac->other_issues }}
-                                                                                @endif
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $iac->action_taken }}
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $iac->adherence_score }}
-                                                                            </td>
-                                                                            <td>action here..</td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
+                                                    @if($patient->iacs->count() < 1)
+                                                        <div class="text-center" style="margin-bottom: 10px;">
+                                                            <span><i>No records for IAC found</i></span>
                                                         </div>
-                                                    </div>
+                                                    @else
+                                                        <div class="card">
+                                                            <div class="card-body table-full-width">
+                                                                <table id="table" class="table text-left" >
+                                                                    <thead>                                                                             
+                                                                        <th data-field="iac_date" style="width: 90px;">IAC Date</th>
+                                                                        <th data-field="pss_issues">Adherence Barries</th>
+                                                                        <th data-field="action_taken">Action Taken / Pyschological Support Provided</th>
+                                                                        <th data-field="adherence_score" data-sortable="true" style="width: 150px">Adherence Score</th>
+                                                                        <th data-field="actions" class="td-actions ">Actions</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach($patient->iacs as $iac)
+                                                                            <tr>
+                                                                                <td>{{ $iac->iac_date }}</td>
+                                                                                <td>
+                                                                                    @foreach($pss_issues as $pss_issue)
+                                                                                        @foreach(explode(",", $iac->pss_issues) as $issue)
+                                                                                            @if($pss_issue->id == $issue)
+                                                                                                {{ $pss_issue->issue }}<br>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endforeach
+                                                                                    @if($iac->other_issues)
+                                                                                        OTHER ISSUES:{{ $iac->other_issues }}
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{ $iac->action_taken }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{ $iac->adherence_score }}
+                                                                                </td>
+                                                                                <td>action here..</td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -389,40 +395,46 @@
                                         <div class="container-fluid">                                 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="card bootstrap-table">
-                                                        <div class="card-body table-full-width">
-                                                            <table id="table" class="table text-left" >
-                                                                <thead>                                                                             
-                                                                    <th data-field="iac_date">Assessment Date</th>
-                                                                    @foreach($patient->assessments as $assessment)
-                                                                        <th>{{ date('dS M Y', strtotime($assessment->assessment_date)) }}</th>
-                                                                    @endforeach
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($assessment_headers as $thead => $tvalue)
-                                                                    <tr>
-                                                                        <th>{{ $thead }}</th>
-                                                                        @foreach($patient->assessments as $assessment)
-                                                                            @if($thead == 'CD4 Date' || $thead == 'CrAg Date' || $thead == 'TBLAM Date' || $thead == 'Date Weight/MUAC taken' || $thead == 'Date Added')
-                                                                                <td>
-                                                                                    {{ date('dS M Y', strtotime($assessment->$tvalue)) }}
-                                                                                </td>
-                                                                            @elseif($thead == 'Recent VL Date')
-                                                                                <td>
-                                                                                    {{ date('dS M Y', strtotime($assessment->viral_load->vl_test_date)) }}
-                                                                                </td>
-                                                                            @elseif($thead == 'VL Copies')
-                                                                                <td>{{ $assessment->viral_load->vl_copies }}</td>
-                                                                            @else
-                                                                                <td>{{ $assessment->$tvalue }}</td>
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
+                                                    @if($patient->assessments->count() <= 1)
+                                                        <div class="text-center" style="margin-bottom: 10px;">
+                                                            <span><i>No records for assessment found</i></span>
                                                         </div>
-                                                    </div>
+                                                    @else
+                                                        <div class="card bootstrap-table">
+                                                            <div class="card-body table-full-width">
+                                                                <table id="table" class="table text-left" >
+                                                                    <thead>                                                                             
+                                                                        <th data-field="iac_date">Assessment Date</th>
+                                                                        @foreach($patient->assessments as $assessment)
+                                                                            <th>{{ date('dS M Y', strtotime($assessment->assessment_date)) }}</th>
+                                                                        @endforeach
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach($assessment_headers as $thead => $tvalue)
+                                                                        <tr>
+                                                                            <th>{{ $thead }}</th>
+                                                                            @foreach($patient->assessments as $assessment)
+                                                                                @if($thead == 'CD4 Date' || $thead == 'CrAg Date' || $thead == 'TBLAM Date' || $thead == 'Date Weight/MUAC taken' || $thead == 'Date Added')
+                                                                                    <td>
+                                                                                        {{ date('dS M Y', strtotime($assessment->$tvalue)) }}
+                                                                                    </td>
+                                                                                @elseif($thead == 'Recent VL Date')
+                                                                                    <td>
+                                                                                        {{ date('dS M Y', strtotime($assessment->viral_load->vl_test_date)) }}
+                                                                                    </td>
+                                                                                @elseif($thead == 'VL Copies')
+                                                                                    <td>{{ $assessment->viral_load->vl_copies }}</td>
+                                                                                @else
+                                                                                    <td>{{ $assessment->$tvalue }}</td>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -441,7 +453,204 @@
                                                 <i class="fa fa-plus"></i>                                        
                                             </a>
                                         </h3>                                        
-                                    </div>                                    
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="container-fluid">                                 
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @if($patient->drug_resistances->count() <= 0)
+                                                        <div class="text-center" style="margin-bottom: 10px;">
+                                                            <span><i>No records for HIV drug resistance found</i></span>
+                                                        </div>
+                                                    @else
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                @foreach($patient->drug_resistances as $drug_resistance)
+                                                                    <button type="button" class="btn-sm btn-block dropdown-toggle" data-toggle="collapse" data-target="#collapseExample-{{$drug_resistance->id}}" aria-expanded="false" aria-controls="collapseExample">
+                                                                        Received: {{ date('dS M Y', strtotime($drug_resistance->created_at)) }} &
+                                                                        @if($drug_resistance->test_result->is_amplified)
+                                                                            @if(explode(" ", $drug_resistance->decision)[0] == 'Pending')
+                                                                                Pending Decision
+                                                                            @else
+                                                                                <b>{{ explode(" ", $drug_resistance->decision)[0] }}</b> on {{ date('dS M Y', strtotime($drug_resistance->decision_date)) }}
+                                                                            @endif
+                                                                        @else
+                                                                            <b><i>Failed to Amplify</i></b>
+                                                                        @endif
+                                                                    </button>
+                                                                    <br />
+                                                                    <div class="collapse" id="collapseExample-{{$drug_resistance->id}}" style="margin-bottom:10px;">
+                                                                        <table class="table table-bordered table-hover">
+                                                                            <tbody>
+                                                                                <tr style="display: none;">
+                                                                                    <th colspan="{{ $drug_resistance->dr_lab_id == 5 ? 7 : 4 }}"></th>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td colspan="{{ $drug_resistance->dr_lab_id == 5 ? 2 : 1 }}">
+                                                                                        Lab: {{ $drug_resistance->dr_lab->name }}
+                                                                                    </td>
+                                                                                    <td colspan="{{ $drug_resistance->dr_lab_id == 5 ? 2 : 1 }}">
+                                                                                        HIVDR Accession #: {{ $drug_resistance->test_result->dr_lab_sample_no }}</td>
+                                                                                    <td colspan="{{ $drug_resistance->dr_lab_id == 5 ? 3 : 2 }}">Age: {{ $patient->getAge($drug_resistance->test_result->dr_test_date) }}</td>
+                                                                                </tr>
+                                                                                <tr style="background: lightgrey;">
+                                                                                    <th class="text-center" colspan="{{ $drug_resistance->dr_lab_id == 5 ? 7 : 4 }}">
+                                                                                        Viral Load
+                                                                                    </th>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Sample collection date: 
+                                                                                        {{ date('dS M Y', strtotime($drug_resistance->test_result->date_collected)) }}
+                                                                                    </td>
+                                                                                    <td>VL test date: 
+                                                                                        {{ date('dS M Y', strtotime($drug_resistance->test_result->vl_test_date)) }}
+                                                                                    </td>
+                                                                                    <td>VL copies: {{ $drug_resistance->test_result->vl_copies }}</td>
+                                                                                </tr>
+                                                                                <tr style="background: lightgrey;">
+                                                                                    <th class="text-center" colspan="{{ $drug_resistance->dr_lab_id == 5 ? 7 : 4 }}">
+                                                                                        HIV DR
+                                                                                    </th>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Sample type: {{ $drug_resistance->test_result->eligible_sample->sample_type }}</td>
+                                                                                    <td>HIVDR test date: 
+                                                                                        {{ $drug_resistance->test_result->dr_test_date ? date('dS M Y', strtotime($drug_resistance->test_result->dr_test_date)) : '' }}
+                                                                                    </td>
+                                                                                    <td>Release date: 
+                                                                                        {{ $drug_resistance->test_result->release_date ? date('dS M Y', strtotime($drug_resistance->test_result->release_date)) : '' }}
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>RT Condons Analyzed: {{ $drug_resistance->test_result->rt_condons }}</td>
+                                                                                    <td>RT Sub-Type: {{ $drug_resistance->test_result->rt_sub_type }}</td>
+                                                                                    <td>Regimen at time of DR test: 
+                                                                                        @foreach($patient->patient_regimens as $regimen)
+                                                                                            @if($regimen->regimen_at_time_of_dr_test($drug_resistance->test_result->dr_test_date))
+                                                                                                {{ $regimen->regimen_old->regimen_name }}
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @if($drug_resistance->dr_lab_id != 5)
+                                                                                    <tr style="background: lightgrey;">
+                                                                                        <th>Resistance</th>
+                                                                                        <th colspan="3">Polymorphism</th>
+                                                                                    </tr>
+                                                                                    @foreach($drug_resistance->polymorphisms as $polymorphism)
+                                                                                        <tr>
+                                                                                            <td>{{ $polymorphism->classification }}</td>
+                                                                                            <th colspan="3" style="font-weight: 500;">
+                                                                                                {{ $polymorphism->polymorphism }}
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    @endforeach
+                                                                                @endif
+                                                                                <tr style="background: lightgrey;">
+                                                                                    <th style="background: white;"></th>
+                                                                                    <th>Drug Code</th>
+                                                                                    <th>Drug Name</th>
+                                                                                    <th>Resistance Level</th>
+                                                                                    @if($drug_resistance->dr_lab_id == 5)
+                                                                                        <th>Scoring</th>
+                                                                                        <th>HIV DR Mutations at ≥ 20%</th>
+                                                                                        <th>HIV DR Mutations at < 20%</th>
+                                                                                    @endif
+                                                                                </tr>
+                                                                                @foreach($drug_resistance->resistances->groupBy('drug_type') as $type => $resistances)
+                                                                                    <tr>
+                                                                                        <td rowspan="{{count($resistances)+1}}">Resistance to: {{ $type }}</td>
+                                                                                        <td style="display: none;"></td>
+                                                                                        <td style="display: none;"></td>
+                                                                                        <td style="display: none;"></td>
+                                                                                        @if($drug_resistance->dr_lab_id == 5)
+                                                                                            <td style="display: none;"></td>
+                                                                                            <td style="display: none;"></td>
+                                                                                            <td style="display: none;"></td>
+                                                                                        @endif
+                                                                                    </tr>
+                                                                                    @foreach($resistances as $resistance)
+                                                                                        <tr>
+                                                                                            <td>{{ $resistance->drug_code }}</td>
+                                                                                            <td>{{ $resistance->drug_name }}</td>
+                                                                                            <td>{{ $resistance->resistance_level }}</td>
+                                                                                            @if($drug_resistance->dr_lab_id == 5)
+                                                                                                <td>{{ $resistance->scoring }}</td>
+                                                                                                <td>{{ $resistance->mutations_at_greater_than_20 }}</td>
+                                                                                                <td>{{ $resistance->mutations_at_less_than_20 }}</td>
+                                                                                            @endif
+                                                                                        </tr>
+                                                                                    @endforeach
+                                                                                @endforeach
+                                                                                @if(count($drug_resistance->dr_comments) > 0)
+                                                                                    <tr style="background: lightgrey;">
+                                                                                        <th class="text-center" colspan="4">COMMENTS</th>
+                                                                                    </tr>
+                                                                                    <tr style="background: lightgrey;">
+                                                                                        <th style="width: 25%">Type</th>
+                                                                                        <th>Classification</th>
+                                                                                        <th colspan="2" style="width: 55%">Release Notes</th>
+                                                                                    </tr>
+                                                                                    @foreach($drug_resistance->dr_comments->groupBy('comment_type') as $type =>  $classifications)
+                                                                                        <tr>
+                                                                                            <td rowspan="{{count($classifications)+1}}">
+                                                                                                @if($type == 'prComments')
+                                                                                                    PR Comments
+                                                                                                @elseif($type == 'rtComments')
+                                                                                                    RT Comments
+                                                                                                @else
+                                                                                                    INSTI
+                                                                                                @endif
+                                                                                            </td>
+                                                                                            <td style="display: none;"></td>
+                                                                                            <th colspan="2" style="display: none;"></th>
+                                                                                        </tr>
+                                                                                        @foreach($classifications->groupBy('drug_type') as $drug_type => $comments)
+                                                                                            <tr>
+                                                                                                <td>{{ $drug_type }}</td>
+                                                                                                <th colspan="2" style="font-weight: 500;">
+                                                                                                    @foreach($comments as $comment)
+                                                                                                        {{ $comment->comment }}<br /><br />
+                                                                                                    @endforeach
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                        @endforeach
+                                                                                    @endforeach
+                                                                                @endif
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <br />
+                                                                        <div class="panel-info" style="border: 7px lavender dotted;">
+                                                                            <div class="panel-heading" style="margin: 5px;">
+                                                                                <h3 class="panel-title">Review Committee Decison</h3>
+                                                                            </div>
+                                                                            <div class="panel-body" style="padding: 10px; background-color: mintcream;">
+                                                                                @if($drug_resistance->test_result->is_amplified)
+                                                                                    @if($drug_resistance->decision == 'pending')
+                                                                                    @else
+                                                                                    <b>Committee decison made on: {{ date('dS M Y', strtotime($drug_resistance->decision_date)) }}</b><br />
+                                                                                    <span class="text-muted">
+                                                                                        <b>Decision:</b> {{ $drug_resistance->decision }}<br />
+                                                                                        <b>Comment:</b> {{ $drug_resistance->decision_comment }}
+                                                                                    </span>
+                                                                                    @endif
+                                                                                @else
+                                                                                    <div>
+                                                                                        <b class="text-info">This sample failed to amplify</b>
+                                                                                    </div>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br />
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>                                
                             </div>
                         </div>

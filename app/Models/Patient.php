@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DrugResistance;
 use App\Models\EligibleSample;
 use App\Models\PatientRegimen;
 use App\Models\RegimenChange;
@@ -76,6 +77,11 @@ class Patient extends Model
         return $this->hasMany(ViralLoad::class);
     }
 
+    public function drug_resistances()
+    {
+        return $this->hasMany(DrugResistance::class)->orderBy('created_at', 'desc');
+    }
+
     public function assessments()
     {
         return $this->through('viral_loads')->has('assessments')->orderBy('assessment_date', 'desc');
@@ -91,9 +97,9 @@ class Patient extends Model
         return $this->hasMany(RegimenChange::class);
     }
 
-    public function getAge()
+    public function getAge($date = null)
     {
-        $age = Carbon::parse($this->birthdate)->diff(Carbon::now())->format('%y yrs %m mths');
+        $age = Carbon::parse($this->birthdate)->diff($date ?? Carbon::now())->format('%y yrs %m mths');
         return $age;
     }
 

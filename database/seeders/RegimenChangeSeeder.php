@@ -20,7 +20,7 @@ class RegimenChangeSeeder extends Seeder
             if (!$firstline) {
                 RegimenChange::create([
                     'patient_id' => empty($data[4]) ? NULL : $data[4],
-                    'art_number' => empty($data[1]) ? NULL : $data[1],
+                    'patient_regimen_id' => empty($data[1]) ? NULL : $data[1],
                     'from_regimen' => NULL,
                     'to_regimen' => NULL,
                     'reasons' => empty($data[2]) ? NULL : $data[2],

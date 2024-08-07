@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patient_regimens', function (Blueprint $table) {
+        Schema::create('d_r_comments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('patient_id')->unsigned();
-            $table->bigInteger('regimen_id')->unsigned()->nullable();
-            $table->bigInteger('regimen_old_id')->unsigned()->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('stop_date')->nullable();
+            $table->bigInteger('drug_resistance_id');
+            $table->string('comment_type');
+            $table->string('drug_type');
+            $table->text('comment');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patient_regimens');
+        Schema::dropIfExists('d_r_comments');
     }
 };

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patient_regimens', function (Blueprint $table) {
+        Schema::create('polymorphisms', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('patient_id')->unsigned();
-            $table->bigInteger('regimen_id')->unsigned()->nullable();
-            $table->bigInteger('regimen_old_id')->unsigned()->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('stop_date')->nullable();
+            $table->bigInteger('drug_resistance_id')->unsigned();
+            $table->string('classification');
+            $table->text('polymorphism');
+            $table->integer('mutations_greater_than_20')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patient_regimens');
+        Schema::dropIfExists('polymorphisms');
     }
 };

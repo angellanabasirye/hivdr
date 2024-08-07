@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ResistanceSeeder::class);
         $this->call(PssIssueSeeder::class);
         $this->call(IACSeeder::class);
+        $this->call(AssessmentSeeder::class);
         $this->call(SocialProfileSeeder::class);
         $this->call(RegimenOldSeeder::class);
         $this->call(PatientRegimenSeeder::class);

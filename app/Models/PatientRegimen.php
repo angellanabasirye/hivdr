@@ -17,14 +17,13 @@ class PatientRegimen extends Model
 
     protected $fillable = [
         'patient_id',
-        'art_number',
         'regimen_id',
         'regimen_old_id',
         'start_date',
         'stop_date',
     ];
 
-    protected $with = ['regimen', 'regimen_old'];
+    protected $with = ['regimen', 'regimen_old', 'regimen_change'];
 
     public function patient()
     {
@@ -43,7 +42,7 @@ class PatientRegimen extends Model
 
     public function regimen_change()
     {
-        return $this->patient->regimen_changes()->where('art_number', $this->art_number)->first(); 
+        return $this->hasOne(RegimenChange::class);
     }
 
     public function regimen_duration()
@@ -53,5 +52,13 @@ class PatientRegimen extends Model
             $duration = Carbon::parse($this->stop_date)->diff(Carbon::parse($this->start_date))->format('%y yrs %m mths');
         }
         return $duration;
+    }
+
+    public function regimen_at_time_of_dr_test($date)
+    {
+        if ($this->created_at < $date && $this->stop_date == NULL && $this->start_date != NULL) {
+            return $this;
+        }
+        return null;
     }
 }

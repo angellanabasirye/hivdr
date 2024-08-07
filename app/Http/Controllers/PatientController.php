@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
+use App\Models\Resistance;
 use App\Models\PssIssue;
 use App\Models\Patient;
 
@@ -60,7 +61,8 @@ class PatientController extends Controller
             'VL Copies' => 'vl_copies',
             'Date Added' => 'created_at',
         ];
-        return view('patients.show', compact('patient', 'patient_vl_before_iac', 'pss_issues', 'assessment_headers'));
+        $drug_types = Resistance::pluck('drug_type')->unique()->values()->all();
+        return view('patients.show', compact('patient', 'patient_vl_before_iac', 'pss_issues', 'assessment_headers', 'drug_types'));
     }
 
     /**
