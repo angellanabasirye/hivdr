@@ -13,7 +13,8 @@ class BatchController extends Controller
      */
     public function index()
     {
-        //
+        $batches = Batch::all();
+        return view('batches.index', compact('batches'));
     }
 
     /**
@@ -37,7 +38,7 @@ class BatchController extends Controller
      */
     public function show(Batch $batch)
     {
-        //
+        return view('batches.show', compact('batch'));
     }
 
     /**

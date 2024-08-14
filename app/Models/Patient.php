@@ -97,7 +97,7 @@ class Patient extends Model
         return $this->hasMany(RegimenChange::class);
     }
 
-    public function getAge($date = null)
+    public function get_age($date = null)
     {
         $age = Carbon::parse($this->birthdate)->diff($date ?? Carbon::now())->format('%y yrs %m mths');
         return $age;

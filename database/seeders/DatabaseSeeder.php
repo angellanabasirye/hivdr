@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(AspSeeder::class);
-        $this->call(LabSeeder::class);
         $this->call(RegionSeeder::class);
         $this->call(ImplementingPartnerSeeder::class);
         $this->call(ClusterSeeder::class);
@@ -45,5 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RegimenOldSeeder::class);
         $this->call(PatientRegimenSeeder::class);
         $this->call(RegimenChangeSeeder::class);
+        $this->call(PolymorphismSeeder::class);
+        $this->call(DRCommentSeeder::class);
     }
 }

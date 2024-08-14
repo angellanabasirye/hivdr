@@ -17,7 +17,7 @@ Tip 2: you can also add an image using data-image tag
         </div>
         <ul class="nav">
             <li class="nav-item ">
-                <a class="nav-link" href=@{{ route('dashboard.index') }}>
+                <a class="nav-link" href="/dash">
                     <i class="nc-icon nc-chart-pie-36 "></i>
                     <p>Dashboard</p>
                 </a>
@@ -29,7 +29,7 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href=@{{ route('batches.index') }}>
+                <a class="nav-link" href="/batches">
                     <i class="nc-icon nc-app"></i>
                     <p>Batches</p>
                 </a>

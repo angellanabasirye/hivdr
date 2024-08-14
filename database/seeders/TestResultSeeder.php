@@ -35,7 +35,7 @@ class TestResultSeeder extends Seeder
                     'dr_lab_sample_no' => empty($data[25]) ? NULL : $data[25],
                     'dr_indication_id' => empty($data[17]) ? NULL : $data[17],
                     'rtpr_or_inti' => empty($data[26]) ? NULL : $data[26],
-                    'is_amplified' => empty($data[27]) ? NULL : $data[27],
+                    'is_amplified' => $data[27] != 0 && empty($data[27]) ? NULL : $data[27],
                     'dr_test_date' => empty($data[28]) ? NULL : Carbon::parse($data[28])->toDateString(),
                     'release_date' => empty($data[29]) ? NULL : Carbon::parse($data[29])->toDateString(),
                     'rt_codons' => empty($data[30]) ? NULL : $data[30],

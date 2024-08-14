@@ -69,7 +69,7 @@ class DrugResistance extends Model
 
     public function resistances()
     {
-        return $this->hasMany(Resistance::class);
+        return $this->hasMany(Resistance::class)->orderBy('created_at', 'desc');
     }
 
     public function polymorphisms()

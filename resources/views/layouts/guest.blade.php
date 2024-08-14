@@ -18,11 +18,15 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <!-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> -->
+                    <img class="w-20 h-20" src="../../assets/img/coat-of-arms1.png" alt="logo">
                 </a>
             </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <div style="margin-bottom: 20px;">
+                    <span style="padding: 10px; font-weight: bold; font-size: 17px; margin-left: 32px;">HIV DRUG RESISTANCE DASHBOARD</span>
+                </div>
                 {{ $slot }}
             </div>
         </div>

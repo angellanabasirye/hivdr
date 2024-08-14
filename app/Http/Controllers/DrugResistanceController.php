@@ -7,10 +7,12 @@ use App\Http\Requests\UpdateDrugResistanceRequest;
 // use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\DrugResistance;
+use App\Models\TestResult;
 use App\Models\ViralLoad;
 
 class DrugResistanceController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -22,12 +24,13 @@ class DrugResistanceController extends Controller
                             ->withWhereHas('viral_load', function ($query) {
                                 $query->where('vl_source', 'LIMS');
                             })
-                            ->withWhereHas('resistance', function ($query) {
+                            ->withWhereHas('resistances', function ($query) {
                                 $query->where('drug_code', 'DTG');
                             })
                             ->where('decision', 'pending')
                             ->get();
-        $count_amplified = $count_failed_to_amplify = 0;
+        $count_amplified = TestResult::where('is_amplified', 1)->count();
+        $count_failed_to_amplify = TestResult::where('is_amplified', 0)->count();
         return view('drug_resistance.index', compact('drug_resistances', 'count_amplified', 'count_failed_to_amplify'));
     }
 

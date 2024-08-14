@@ -36,7 +36,7 @@
                                                 <div class="col-md-12">
                                                     <p>
                                                         <strong>Date of Birth:</strong>&nbsp;&nbsp;&nbsp;
-                                                        {{ date('dS M Y', strtotime($patient->birthdate)) }} ({{$patient->getAge()}})
+                                                        {{ date('dS M Y', strtotime($patient->birthdate)) }} ({{$patient->get_age()}})
                                                     </p>
                                                 </div>
                                                 
@@ -491,7 +491,7 @@
                                                                                     </td>
                                                                                     <td colspan="{{ $drug_resistance->dr_lab_id == 5 ? 2 : 1 }}">
                                                                                         HIVDR Accession #: {{ $drug_resistance->test_result->dr_lab_sample_no }}</td>
-                                                                                    <td colspan="{{ $drug_resistance->dr_lab_id == 5 ? 3 : 2 }}">Age: {{ $patient->getAge($drug_resistance->test_result->dr_test_date) }}</td>
+                                                                                    <td colspan="{{ $drug_resistance->dr_lab_id == 5 ? 3 : 2 }}">Age: {{ $patient->get_age($drug_resistance->test_result->dr_test_date) }}</td>
                                                                                 </tr>
                                                                                 <tr style="background: lightgrey;">
                                                                                     <th class="text-center" colspan="{{ $drug_resistance->dr_lab_id == 5 ? 7 : 4 }}">

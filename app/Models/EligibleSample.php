@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\TestResult;
 use App\Models\Facility;
 use App\Models\Patient;
+use App\Models\Batch;
 use Carbon\Carbon;
 
 class EligibleSample extends Model
@@ -57,5 +58,15 @@ class EligibleSample extends Model
     public function test_result()
     {
         return $this->belongsTo(TestResult::class);
+    }
+
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
+    }
+
+    public function dr_lab()
+    {
+        return $this->belongsTo(Lab::class, 'assigned_dr_lab');
     }
 }

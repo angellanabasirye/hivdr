@@ -15,7 +15,7 @@
                                         <div class="form-check checkbox-inline" >
                                             <a href="#"  class="view_profile">
                                                 <span>
-                                                    <font size="2">  All Patients <span class="badge badge-success"> {{ $patients->where('status', '=', 'referred')->count()}} </font></span>&nbsp;&nbsp;&nbsp;
+                                                    <font size="2">All Patients&nbsp;&nbsp;<span class="badge badge-success">{{ $patients->count() }}</font></span>&nbsp;&nbsp;&nbsp;
                                                 </span>
                                             </a>
                                         </div>
@@ -41,9 +41,9 @@
                         <table id="bootstrap-table" class="table">
                             <thead>
                                 <!--<th data-field="state" data-checkbox="true"></th>-->
-                                <th data-field="facility_id" class="text-center" data-sortable="true">Facility</th>
+                                <th data-field="facility_id" class="text-left" data-sortable="true">Facility</th>
                                 <th data-field="art_number" class="text-center" >Art No.</th>
-                                <th data-field="birthdate" class="text-center" data-sortable="true">Birth Date</th>
+                                <th data-field="age" class="text-center" data-sortable="true">Age</th>
                                 <th data-field="phone" class="text-center">Phone</th>
                                 <th data-field="gender" class="text-center" data-sortable="true">Gender</th>
                                 <th data-field="art_start_date" class="text-center" >ART Start Date</th>
@@ -58,10 +58,10 @@
                                     <!--<td></td>-->
                                     <td>{{ $patient->facility->name ?? 'empty'}}</td>                            
                                     <td>{{ $patient->art_number }}</td>
-                                    <td>{{ $patient->birthdate }}</td>
+                                    <td>{{ $patient->get_age() }}</td>
                                     <td>{{ $patient->phone }}</td>
                                     <td>{{ $patient->gender }}</td>
-                                    <td>{{ $patient->art_start_date }}</td>
+                                    <td>{{ date('dS M Y', strtotime($patient->art_start_date)) }}</td>
                                     <td>{{ $patient->status }}</td>
                                     <td>{{ $patient->is_backlog}}</td>
                                     <td>{{ $patient->created_by }}</td>

@@ -60,7 +60,9 @@
                                     <td>{{ $dr->viral_load->vl_copies ?? '' }}</td>
                                     <td>{{ $dr->test_result->dr_test_date ?? '' }}</td>
                                     <td>{{ $dr->dr_lab->name }}</td>
-                                    <td>{{ $dr->resistance->resistance_level }}</td>
+                                    <td>
+                                        {{ $dr->resistances->first()->resistance_level ?? '<small class="text-muted">-NA</small>' }}
+                                    </td>
                                     <td>
                                         {{ empty($dr->test_result->rtpr_or_inti) || $dr->test_result->rtpr_or_inti == null ? 'No' : 'Yes' }}
                                     </td>

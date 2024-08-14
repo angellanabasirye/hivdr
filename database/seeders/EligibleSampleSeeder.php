@@ -36,7 +36,7 @@ class EligibleSampleSeeder extends Seeder
                     'assigned_dr_lab' => empty($data[14]) ? NULL : $data[14],
                     'batch_id' => empty($data[15]) ? NULL : $data[15],
                     'test_result_id' => NULL,
-                    'form_number' => $data[4],
+                    'form_number' => empty($data[3]) ? NULL : preg_split('/[_]+/', $data[3])[1], // extract from number from eligibleSampleId
                     'status' => NULL, // deferred, awaiting referral, referred, pending, rejected
                     'deferred_at' => NULL,
                     'referred_to_dr_at' => empty($data[16]) ? NULL : Carbon::parse($data[16])->toDateTimeString(),
