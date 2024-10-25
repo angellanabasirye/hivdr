@@ -27,6 +27,8 @@ class FacilitySeeder extends Seeder
                     'district_id' => $data[4],
                     'hub_id' => $data[5],
                     'implementing_partner_id' => $data[3],
+                    'clinician_contact' => $data[8],
+                    'facility_email' => $data[9],
                     'created_by' => NULL,
                     'created_at' => $data[11],
                     'updated_at' => NULL,

@@ -42,6 +42,8 @@ class Facility extends Model
         'district_id',
         'hub_id',
         'implementing_partner_id',
+        'clinician_contact',
+        'facility_email',
         'created_by',
     ];
 

@@ -1,5 +1,5 @@
 @extends('layouts.light_bootstrap')
-@section('pagetitle', 'HIV DR Eligible Samples')
+@section('pagetitle', 'HIV DR Referrals')
 @section('subtitle', '')
 @section("content")            
 <div class="content">
@@ -12,10 +12,19 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12 text-right">
-                                        {{ $eligible_samples->count() }} eligible samples
+                                        {{ $eligible_samples->count() }} {{ $index_status }} 
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="tabs">
+                            <ul role="tablist" class="nav nav-tabs">
+                                @foreach($statuses as $status)
+                                    <li role="presentation" class="nav-item {{ trim($index_status) == trim($status) ? 'active show' : '' }}">
+                                        <a class="nav-link {{ trim($index_status) == trim($status) ? 'active' : '' }}" id="{{$status}}-tab" href="/referrals_deferrals/{{$status}}">{{ ucfirst($status) }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <table id="bootstrap-table" class="table">
                             <thead>

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->bigInteger('district_id')->unsigned()->nullable();
             $table->bigInteger('hub_id')->unsigned()->nullable();
             $table->bigInteger('implementing_partner_id')->unsigned()->nullable();
+            $table->string('clinician_contact')->nullable();
+            $table->string('facility_email')->nullable();
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->softDeletes();
 

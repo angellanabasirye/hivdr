@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAssessmentRequest;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Http\Requests\UpdateAssessmentRequest;
+use App\Http\Requests\StoreAssessmentRequest;
 use App\Models\Assessment;
 
 class AssessmentController extends Controller
@@ -13,7 +14,13 @@ class AssessmentController extends Controller
      */
     public function index()
     {
-        //
+        $assessments = Assessment::withWhereHas('patient', function (Builder $query) {
+                           $query->where('status', 'Alive and on treatment');
+                       })
+                       ->with(['patient.facility.implementing_partner', 'patient.latest_viral_load'])
+                       ->get();
+                       // dd($assessments);
+        return view('assessments.index', compact('assessments'));
     }
 
     /**

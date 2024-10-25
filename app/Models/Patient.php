@@ -16,6 +16,7 @@ use App\Models\ViralLoad;
 use App\Models\Facility;
 use App\Models\IAC;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class Patient extends Model
 {
@@ -77,19 +78,35 @@ class Patient extends Model
         return $this->hasMany(ViralLoad::class);
     }
 
+    public function latest_viral_load()
+    {
+        return $this->viral_loads()->one()->ofMany('vl_test_date', 'max');
+    }
+
     public function drug_resistances()
     {
         return $this->hasMany(DrugResistance::class)->orderBy('created_at', 'desc');
     }
 
+    public function latest_drug_resistance()
+    {
+        return $this->drug_resistances()->one()->ofMany('created_at', 'max');
+    }
+
     public function assessments()
     {
-        return $this->through('viral_loads')->has('assessments')->orderBy('assessment_date', 'desc');
+        return $this->hasMany(Assessment::class);
+        // return $this->through('viral_loads')->has('assessments')->orderBy('assessment_date', 'desc');
     }
 
     public function patient_regimens()
     {
         return $this->hasMany(PatientRegimen::class)->orderBy('start_date', 'desc');
+    }
+
+    public function current_regimen()
+    {
+        return $this->patient_regimens()->one()->whereDoesntHave('regimen_change');
     }
 
     public function regimen_changes()

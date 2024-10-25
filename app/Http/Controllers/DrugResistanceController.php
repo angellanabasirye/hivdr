@@ -81,4 +81,20 @@ class DrugResistanceController extends Controller
     {
         //
     }
+
+    public function discussed()
+    {
+        $drug_resistances = DrugResistance::withWhereHas('patient', function ($query) {
+                                $query->where('status', 'Alive and on treatment');
+                            })
+                            ->withWhereHas('viral_load', function ($query) {
+                                $query->where('vl_source', 'LIMS');
+                            })
+                            ->withWhereHas('resistances', function ($query) {
+                                $query->where('drug_code', 'DTG');
+                            })
+                            ->where('decision', '<>', 'pending')
+                            ->get();
+        return view('drug_resistance.discussed', compact('drug_resistances'));
+    }
 }

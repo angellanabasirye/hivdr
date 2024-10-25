@@ -56,11 +56,19 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p><strong>Clinician Phone:</strong>&nbsp;&nbsp;&nbsp;</p></div>
+                                                    <p>
+                                                        <strong>Clinician Phone:</strong>&nbsp;&nbsp;&nbsp;
+                                                        {{ $patient->facility->clinician_contact ?? '' }}
+                                                    </p>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p><strong>Clinician Email:</strong>&nbsp;&nbsp;&nbsp;</p></div>
+                                                    <p>
+                                                        <strong>Clinician Email:</strong>&nbsp;&nbsp;&nbsp;
+                                                        {{ $patient->facility->facility_email ?? '' }}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div> <!-- ./ panel-body -->
@@ -90,7 +98,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <p><strong>Current Regimen:</strong>&nbsp;&nbsp;&nbsp;
-                                                        {{ $patient->current_regimen ?? $patient->old_regimen }}
+                                                        {{ $patient->current_regimen->regimen->name ?? $patient->current_regimen->regimen_old->regimen_name }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -99,7 +107,7 @@
                                                     <p>
                                                         <strong>Treatment Line:</strong>&nbsp;&nbsp;&nbsp;
                                                         {{ $patient->current_regimen->treatment_line ?? null }} / 
-                                                        {{ $patient->old_regimen->treatment_line ?? null }}
+                                                        {{ $patient->current_regimen->regimen_old->treatment_line ?? null }}
                                                     </p>
                                                 </div>
                                             </div>                                               
@@ -123,7 +131,9 @@
                                                 <div class="col-md-12">
                                                     <p>
                                                         <strong>WHO Status:</strong>&nbsp;&nbsp;&nbsp;
-                                                        {{ $patient->vl_test_results->first()->eligible_sample->who_status }}
+                                                        @if($patient->vl_test_results->first()->eligible_sample)
+                                                            {{ $patient->vl_test_results->first()->eligible_sample->who_status }}
+                                                        @endif
                                                     </p>
                                                 </div>
                                             </div>
@@ -203,7 +213,7 @@
                                                                             {{ $p_regimen->start_date ? date('dS M Y', strtotime($p_regimen->start_date)) : 'update ART history' }}
                                                                         </td>
                                                                         <td>
-                                                                            {{ $p_regimen->stop_date ? date('dS M Y', strtotime($p_regimen->stop_date)) : 'current regimen' }}
+                                                                            {{ $p_regimen->start_date ? ($p_regimen->stop_date ? date('dS M Y', strtotime($p_regimen->stop_date)) : 'current regimen') : '' }}
                                                                         </td>
                                                                         <td>{{ $p_regimen->regimen_change()->reasons ?? '' }} {{ $p_regimen->regimen_change()->comment ?? '' }}</td>
                                                                     </tr>

@@ -1,5 +1,5 @@
 @extends('layouts.light_bootstrap')
-@section('pagetitle', 'HIV DR Results')
+@section('pagetitle', 'HIV DR Discussed Cases')
 @section('subtitle', '')
 @section("content")            
 <div class="content">
@@ -12,20 +12,6 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-check checkbox-inline" >
-                                            <a href="#"  class="view_profile">
-                                                <span>
-                                                    <font size="2">Amplified <span class="badge badge-success"> {{ $count_amplified }} </font></span>&nbsp;&nbsp;&nbsp;
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="form-check checkbox-inline">
-                                            <a href="#">
-                                                <span>
-                                                    <font size="2">Failed to amplify <span class="badge badge-danger"> {{ $count_failed_to_amplify }}</font></span>&nbsp;&nbsp;&nbsp;
-                                                </span>
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -38,13 +24,13 @@
                                 <th data-field="implementing_partner_id" class="text-center" data-sortable="true">IP</th>
                                 <th data-field="clinician_contact" class="text-center">Clinician Contact</th>
                                 <th data-field="art_number" class="text-center" >Art No.</th>
-                                <th data-field="birthdate" class="text-center" data-sortable="true">Birth Date</th>
+                                <th data-field="birthdate" class="text-center" data-sortable="true">Age</th>
                                 <th data-field="vl_test_date" class="text-center" >VL Test Date</th>
                                 <th data-field="vl_copies" class="text-center" >VL Copies</th>
                                 <th data-field="dr_test_date" class="text-center" >DR Test Date</th>
                                 <th data-field="dr_lab_id" class="text-center" >DR Lab</th>
-                                <th data-field="dtg_resistance" class="text-center" >DTG Resistance</th>
-                                <th data-field="dual" class="text-center" data-sortable="true">Dual</th>
+                                <th data-field="decision_date" class="text-center" >Decision Date</th>
+                                <th data-field="decision" class="text-center" data-sortable="true">Decision</th>
                                 <th data-field="actions" class="td-actions text-center" >Actions</th>
                             </thead>
                             <tbody>
@@ -55,17 +41,13 @@
                                     <td>{{ $dr->patient->facility->implementing_partner->name ?? 'empty'}}</td>
                                     <td>{{ $dr->patient->facility->clinician_contact ?? 'empty'}}</td>
                                     <td>{{ $dr->patient->art_number }}</td>
-                                    <td>{{ $dr->patient->birthdate }}</td>
+                                    <td>{{ $dr->patient->get_age() }}</td>
                                     <td>{{ $dr->viral_load->vl_test_date ?? '' }}</td>
                                     <td>{{ $dr->viral_load->vl_copies ?? '' }}</td>
                                     <td>{{ $dr->test_result->dr_test_date ?? '' }}</td>
                                     <td>{{ $dr->dr_lab->name }}</td>
-                                    <td>
-                                        {{ $dr->resistances->first()->resistance_level ?? '<small class="text-muted">-NA</small>' }}
-                                    </td>
-                                    <td>
-                                        {{ empty($dr->test_result->rtpr_or_inti) || $dr->test_result->rtpr_or_inti == null ? 'No' : 'Yes' }}
-                                    </td>
+                                    <td>{{ $dr->decision_date }}</td>
+                                    <td>{{ explode(" ", $dr->decision)[0] }}</td>
                                     <td>                                        
                                         <a class="btn btn-social btn-primary btn-round view_profile" id="view-{{ $dr->patient_id}}-link"
                                            href="{{ route('patients.show', array($dr->patient_id)) }}"

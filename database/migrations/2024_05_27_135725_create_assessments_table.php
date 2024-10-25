@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('assessment_date');
             $table->bigInteger('vl_id')->unsigned()->nullable();
+            $table->bigInteger('patient_id')->unsigned()->nullable();
             $table->string('pss_issues')->nullable();
             $table->string('stable')->nullable();
             $table->string('hasAHD')->nullable();

@@ -4,7 +4,7 @@
     <div class="container-fluid" style="margin-top: 20px;">
         <div class="row">
             <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats">
+                <div class="card card-stats" style="height: 180px">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-2">
@@ -15,8 +15,8 @@
                             <div class="col-10">
                                 <div class="numbers">
                                     <p class="card-category">Eligible Samples Profile</p>
-                                    <h5 class="card-title">5924 Eligible Samples</h5>
-                                    <h6 class="card-title">61% Plasma</h6>
+                                    <h5 class="card-title" style="padding-top: 5px">5924 Eligible Samples</h5>
+                                    <h6 class="card-title" style="padding-top: 5px">61% Plasma</h6>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats">
+                <div class="card card-stats" style="height: 180px">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-2">
@@ -41,8 +41,8 @@
                             <div class="col-10">
                                 <div class="numbers">
                                     <p class="card-category">Drug Resistance Testing</p>
-                                    <h5 class="card-title">3,198 Referred for DRT</h5>
-                                    <h6 class="card-title">2,577 (81%) Results received</h6>
+                                    <h5 class="card-title" style="padding-top: 5px">3,198 Referred for DRT</h5>
+                                    <h6 class="card-title" style="padding-top: 5px">2,577 (81%) Results received</h6>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats">
+                <div class="card card-stats" style="height: 180px">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-2">
@@ -67,8 +67,8 @@
                             <div class="col-10">
                                 <div class="numbers">
                                     <p class="card-category">Case Discussion</p>
-                                    <h5 class="card-title">1,705 (86%) Discussed</h5>
-                                    <h6 class="card-title">857 (50%) Switched</h6>
+                                    <h5 class="card-title" style="padding-top: 5px">1,705 (86%) Discussed</h5>
+                                    <h6 class="card-title" style="padding-top: 5px">857 (50%) Switched</h6>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats">
+                <div class="card card-stats" style="height: 180px">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-2">
@@ -93,7 +93,7 @@
                             <div class="col-10">
                                 <div class="numbers">
                                     <p class="card-category">TAT (Sample Collection to Discussion)</p>
-                                     <h5 class="card-title">196 Days</h5>
+                                     <h5 class="card-title" style="padding-top: 5px">196 Days</h5>
                                 </div>
                             </div>
                         </div>
@@ -107,314 +107,25 @@
                 </div>
             </div>
         </div>
+        <div class="row" style="margin-top:10px; margin-bottom:10px; padding-top: 10px; padding-bottom: 10px;">
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card ">
                     <div class="card-header ">
-                        <h4 class="card-title">Global Sales by Top Locations</h4>
-                        <p class="card-category">All products that were shipped</p>
-                    </div>
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/US.png" </div>
-                                                        </td>
-                                                        <td>USA</td>
-                                                        <td class="text-right">
-                                                            2.920
-                                                        </td>
-                                                        <td class="text-right">
-                                                            53.23%
-                                                        </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/DE.png" </div>
-                                                        </td>
-                                                        <td>Germany</td>
-                                                        <td class="text-right">
-                                                            1.300
-                                                        </td>
-                                                        <td class="text-right">
-                                                            20.43%
-                                                        </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/AU.png" </div>
-                                                        </td>
-                                                        <td>Australia</td>
-                                                        <td class="text-right">
-                                                            760
-                                                        </td>
-                                                        <td class="text-right">
-                                                            10.35%
-                                                        </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/GB.png" </div>
-                                                        </td>
-                                                        <td>United Kingdom</td>
-                                                        <td class="text-right">
-                                                            690
-                                                        </td>
-                                                        <td class="text-right">
-                                                            7.87%
-                                                        </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/RO.png" </div>
-                                                        </td>
-                                                        <td>Romania</td>
-                                                        <td class="text-right">
-                                                            600
-                                                        </td>
-                                                        <td class="text-right">
-                                                            5.94%
-                                                        </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="flag">
-                                                        <img src="../assets/img/flags/BR.png" </div>
-                                                        </td>
-                                                        <td>Brasil</td>
-                                                        <td class="text-right">
-                                                            550
-                                                        </td>
-                                                        <td class="text-right">
-                                                            4.34%
-                                                        </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ml-auto mr-auto">
-                                <div id="worldMap" style="height: 300px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header ">
-                        <h4 class="card-title">Email Statistics</h4>
-                        <p class="card-category">Last Campaign Performance</p>
-                    </div>
-                    <div class="card-body ">
-                        <div id=chartEmail class="ct-chart ct-perfect-fourth"></div>
-                    </div>
-                    <div class="card-footer ">
-                        <div class="legend">
-                            <i class="fa fa-circle text-info"></i> Open
-                            <i class="fa fa-circle text-danger"></i> Bounce
-                            <i class="fa fa-circle text-warning"></i> Unsubscribe
-                        </div>
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card ">
-                    <div class="card-header ">
-                        <h4 class="card-title">Users Behavior</h4>
-                        <p class="card-category">24 Hours performance</p>
-                    </div>
-                    <div class="card-body ">
-                        <div id=chartHours class="ct-chart"></div>
-                    </div>
-                    <div class="card-footer ">
-                        <div class="legend">
-                            <i class="fa fa-circle text-info"></i> Open
-                            <i class="fa fa-circle text-danger"></i> Click
-                            <i class="fa fa-circle text-warning"></i> Click Second Time
-                        </div>
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-history"></i> Updated 3 minutes ago
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card ">
-                    <div class="card-header ">
-                        <h4 class="card-title">2017 Sales</h4>
-                        <p class="card-category">All products including Taxes</p>
+                        <h4 class="card-title">Cascade Summary: from date - to date cohort</h4>
                     </div>
                     <div class="card-body ">
                         <div id="chartActivity" class="ct-chart"></div>
                     </div>
                     <div class="card-footer ">
-                        <div class="legend">
-                            <i class="fa fa-circle text-info"></i> Tesla Model S
-                            <i class="fa fa-circle text-danger"></i> BMW 5 Series
-                        </div>
                         <hr>
-                        <div class="stats">
-                            <i class="fa fa-check"></i> Data information certified
+                        <div class="stats text-right">
+                            <i class="fa fa-check"></i> Source: HIVDR Database
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card  card-tasks">
-                    <div class="card-header ">
-                        <h4 class="card-title">Tasks</h4>
-                        <p class="card-category">Backend development</p>
-                    </div>
-                    <div class="card-body ">
-                        <div class="table-full-width">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="">
-                                                    <span class="form-check-sign"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="" checked>
-                                                    <span class="form-check-sign"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="" checked>
-                                                    <span class="form-check-sign"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" checked>
-                                                    <span class="form-check-sign"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="">
-                                                    <span class="form-check-sign"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Read "Following makes Medium better"</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" value="" checked>
-                                                    <span class="form-check-sign"></span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>Unfollow 5 enemies from twitter</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>            
         </div>
     </div>
 

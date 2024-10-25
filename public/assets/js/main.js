@@ -122,6 +122,49 @@ $(function () {
 //    });
 
     
+    var data = {
+      labels: ['Eligible for DRT', 'Referred for DRT', 'Received results', 'Amplified', 'Reviewed', 'Maintained', 'Switched', 'Substituted', 'Started on ART'],
+      series: [
+        [542, 443, 320, 780, 553, 453, 326, 434, 568]
+
+      ]
+    };
+
+    var options = {
+        seriesBarDistance: 10,
+        axisX: {
+            offset: 30,
+            showGrid: false,
+        },
+        axisY: {
+            scaleMinSpace: 25,
+        },
+        height: "400px",
+        plugins: [
+          Chartist.plugins.ctBarLabels()
+        ]
+    };
+
+    var responsiveOptions = [
+      ['screen and (max-width: 640px)', {
+        seriesBarDistance: 5,
+        axisX: {
+          labelInterpolationFnc: function (value) {
+            return value[0];
+          }
+        }
+      }]
+    ];
+
+    Chartist.Bar('#chartActivity', data, options, responsiveOptions).on('draw', function(data) {
+      if(data.type === 'bar') {
+        data.element.attr({
+          style: 'stroke-width: 50px'
+        }); 
+      }
+    });
+
+    
 
 });
 

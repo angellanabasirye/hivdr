@@ -35,7 +35,7 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>   
             <li class="nav-item ">
-                <a class="nav-link" href=@{{ route('referrals') }}>
+                <a class="nav-link" href="/referrals_deferrals/referred">
                     <i class="nc-icon nc-delivery-fast"></i>
                     <p>Referrals & Deferrals</p>
                 </a>
@@ -48,13 +48,13 @@ Tip 2: you can also add an image using data-image tag
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" href=@{{ route('dashboard.index') }}>
+                <a class="nav-link" href="/discussed">
                     <i class="nc-icon nc-circle"></i>
                     <p>Discussed</p>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href=@{{ route('dashboard.index') }}>
+                <a class="nav-link" href="/assessments">
                     <i class="nc-icon nc-support-17"></i>
                     <p>Cohort Tracker</p>
                 </a>

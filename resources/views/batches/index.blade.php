@@ -43,7 +43,7 @@
                                     <td>{{ $batch->eligible_samples->count() }}</td>
                                     <td>
                                         @if($batch->eligible_samples->where('accepted_at_dr', '<>', 1)->count() > 0)
-                                            {{ $batch->eligible_samples->where('accepted_at_dr', '<>', 1)->count() > 0 }}
+                                            {{ $batch->eligible_samples->where('accepted_at_dr', '<>', 1)->count() }}
                                         @else
                                             <span class='text-success'>&#10003; </span> <span class='text-muted'> None<span>
                                         @endif

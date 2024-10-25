@@ -41,12 +41,14 @@
     <script src="../../assets/js/popper.min.js" type="text/javascript"></script>
     <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../../assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+    <script src="../../assets/js/main.js" type="text/javascript"></script>
     <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
     <script src="../../assets/js/plugins/bootstrap-switch.js"></script>
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?YOUR_KEY_HERE"></script>
     <!--  Chartist Plugin  -->
     <script src="../../assets/js/plugins/chartist.min.js"></script>
+    <script src="../../assets/js/plugins/chartist-bar-labels.js"></script>
     <!--  Notifications Plugin    -->
     <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
     <!--  jVector Map  -->
@@ -123,9 +125,9 @@
                     showColumns: true,
                     pagination: true,
                     searchAlign: 'right',
-                    pageSize: 8,
+                    pageSize: 12,
                     clickToSelect: false,
-                    pageList: [8, 10, 25, 50, 100],
+                    pageList: [12, 20, 25, 50, 100],
 
                     formatShowingRows: function (pageFrom, pageTo, totalRows) {
                         //do nothing here, we don't want to show the text "showing x of y from..."
