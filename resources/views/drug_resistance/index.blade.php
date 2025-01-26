@@ -1,7 +1,7 @@
 @extends('layouts.light_bootstrap')
 @section('pagetitle', 'HIV DR Results')
 @section('subtitle', '')
-@section("content")            
+@section("content")
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -11,25 +11,21 @@
                         <div class="toolbar">
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-check checkbox-inline" >
-                                            <a href="#"  class="view_profile">
-                                                <span>
-                                                    <font size="2">Amplified <span class="badge badge-success"> {{ $count_amplified }} </font></span>&nbsp;&nbsp;&nbsp;
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="form-check checkbox-inline">
-                                            <a href="#">
-                                                <span>
-                                                    <font size="2">Failed to amplify <span class="badge badge-danger"> {{ $count_failed_to_amplify }}</font></span>&nbsp;&nbsp;&nbsp;
-                                                </span>
-                                            </a>
-                                        </div>
+                                    <div class="col-md-12 text-right">
+                                        {{ $drug_resistances->count() }} {{ $index_status }} 
                                     </div>
                                 </div>
                             </div>
                             <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="tabs">
+                            <ul role="tablist" class="nav nav-tabs">
+                                @foreach($statuses as $status)
+                                    <li role="presentation" class="nav-item {{ trim($index_status) == trim($status) ? 'active show' : '' }}">
+                                        <a class="nav-link {{ trim($index_status) == trim($status) ? 'active' : '' }}" id="{{$status}}-tab" href="/drug_resistance?status={{$status}}">{{ ucfirst($status) }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <table id="bootstrap-table" class="table">
                             <thead>
@@ -61,7 +57,7 @@
                                     <td>{{ $dr->test_result->dr_test_date ?? '' }}</td>
                                     <td>{{ $dr->dr_lab->name }}</td>
                                     <td>
-                                        {{ $dr->resistances->first()->resistance_level ?? '<small class="text-muted">-NA</small>' }}
+                                        {{ $dr->resistances->first()->resistance_level ?? "-NA" }}
                                     </td>
                                     <td>
                                         {{ empty($dr->test_result->rtpr_or_inti) || $dr->test_result->rtpr_or_inti == null ? 'No' : 'Yes' }}

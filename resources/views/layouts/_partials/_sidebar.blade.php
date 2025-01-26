@@ -35,10 +35,34 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>   
             <li class="nav-item ">
-                <a class="nav-link" href="/referrals_deferrals/referred">
+                <a class="nav-link" data-toggle="collapse" href="#tablesExamples3">
                     <i class="nc-icon nc-delivery-fast"></i>
-                    <p>Referrals & Deferrals</p>
+                    <p>Referrals
+                        <b class="caret"></b>
+                    </p>
                 </a>
+                <div class="collapse " id="tablesExamples3">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/referrals_deferrals/referred">
+                                <span class="sidebar-mini">R</span>
+                                <span class="sidebar-normal">Referred</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/referrals_deferrals/deferred">
+                                <span class="sidebar-mini">D</span>
+                                <span class="sidebar-normal">Deferred</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/referrals_deferrals/rejected">
+                                <span class="sidebar-mini">R</span>
+                                <span class="sidebar-normal">Rejected</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>  
             <li class="nav-item ">
                 <a class="nav-link" href="/drug_resistance">
@@ -63,7 +87,7 @@ Tip 2: you can also add an image using data-image tag
                 <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
                     <i class="nc-icon nc-single-02"></i>
                     <p>
-                        Patients    
+                        Patients
                         <b class="caret"></b>
                     </p>
                 </a>
@@ -72,26 +96,31 @@ Tip 2: you can also add an image using data-image tag
                         <li class="nav-item ">
                             <a class="nav-link" href="/patients">
                                 <span class="sidebar-mini">P</span>
-                                <span class="sidebar-normal">View Patients</span>
+                                <span class="sidebar-normal">All Patients</span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="./tables/extended.html">
+                            <a class="nav-link" href="/patients?type=old data">
+                                <span class="sidebar-mini">O</span>
+                                <span class="sidebar-normal">Old data (Manually entered)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/patients?type=out of care">
+                                <span class="sidebar-mini">OC</span>
+                                <span class="sidebar-normal">Out of Care</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/patients?type=transfers">
                                 <span class="sidebar-mini">T</span>
                                 <span class="sidebar-normal">Transfers
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="./tables/bootstrap-table.html">
+                            <a class="nav-link" href="/patients?type=backlog">
                                 <span class="sidebar-mini">B</span>
-                                <span class="sidebar-normal">Backlog 
-                                Reports</span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./tables/datatables.net.html">
-                                <span class="sidebar-mini">DT</span>
-                                <span class="sidebar-normal">DataTables.net</span>
+                                <span class="sidebar-normal">Backlog Entry Reports</span>
                             </a>
                         </li>
                     </ul>

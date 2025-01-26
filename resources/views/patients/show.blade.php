@@ -8,8 +8,51 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title "><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $patient->art_number }}</h4>                        
+                        <ul class="nav pull-right">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-toggle='modal' data-target='#artProfileModal'>
+                                    <i class="fa fa-id-badge" aria-hidden="true"></i> ART Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-toggle='modal' data-target='#vlModal'>
+                                    <i class="fa fa-tint" aria-hidden="true"></i> Add VL
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-headphones" aria-hidden="true"></i> Social Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-search-plus" aria-hidden="true"></i> IAC History
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-list-alt" aria-hidden="true"></i> Weight, MUAC, AHD
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-gear" aria-hidden="true"></i> Care Status
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-edit" aria-hidden="true"></i> Edit Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted">
+                                    {{ $patient->facility->name }}
+                                </a>
+                            </li>
+                        </ul>
+                        <h4 class="card-title "><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $patient->art_number }}</h4>
                     </div>
+                    @include('patients._partials.modals')
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">  
@@ -18,8 +61,7 @@
                                         <h3 class="panel-title">
                                             Biography
                                             <a class=" view_profile" id="view-{{$patient->id}}-link"
-                                               href="{{ route('patients.show', array($patient->id)) }}"
-                                               style="padding: 3px; margin-bottom: 5px;" rel="tooltip" title="Edit Patient Info">
+                                                style="padding: 3px; margin-bottom: 5px;" rel="tooltip" title="Edit Patient Info">
                                                 <i class="fa fa-edit"></i>                                        
                                             </a>
                                         </h3>
@@ -148,8 +190,8 @@
                                     <div class="panel-heading" style="margin-bottom: 5px;">
                                         <h3 class="panel-title">ART History 
                                             <a class=" view_profile" id="view-{{$patient->id}}-link"
-                                               href="{{ route('patients.show', array($patient->id)) }}"
-                                               style="padding: 3px;" rel="tooltip" title="Add ART Info">
+                                                data-toggle='modal' data-target='#artProfileModal'
+                                                style="padding: 3px;" rel="tooltip" title="Add ART Info">
                                                 <i class="fa fa-plus"></i>                                        
                                             </a>
                                         </h3>
@@ -190,10 +232,10 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="card bootstrap-table">
-                                                        <div class="card-body table-full-width">
+                                                        <div class="card-body">
                                                             <table id="table" class="table text-left" >
                                                                 <thead>                                                                             
-                                                                    <th data-field="artline">ART Line</th>
+                                                                    <th data-field="artline" style="padding-left: 10px;">ART Line</th>
                                                                     <th data-field="duration">Duration</th>
                                                                     <th data-field="regimen">Regimen</th>
                                                                     <th data-field="startdate" data-sortable="true">Start date</th>
@@ -216,6 +258,7 @@
                                                                             {{ $p_regimen->start_date ? ($p_regimen->stop_date ? date('dS M Y', strtotime($p_regimen->stop_date)) : 'current regimen') : '' }}
                                                                         </td>
                                                                         <td>{{ $p_regimen->regimen_change()->reasons ?? '' }} {{ $p_regimen->regimen_change()->comment ?? '' }}</td>
+                                                                        <td></td>
                                                                     </tr>
                                                                     @endforeach
                                                                 </tbody>
@@ -275,8 +318,8 @@
                                     <div class="panel-heading" style="margin-bottom: 5px;">
                                         <h3 class="panel-title">Virological Profile
                                             <a class=" view_profile" id="view-{{$patient->id}}-link"
-                                               href="{{ route('patients.show', array($patient->id)) }}"
-                                               style="padding: 3px;" rel="tooltip" title="Add ART Info">
+                                                data-toggle='modal' data-target='#vlModal'
+                                                style="padding: 3px;" rel="tooltip" title="Add VL">
                                                 <i class="fa fa-plus"></i>                                        
                                             </a>
                                         </h3>
@@ -638,10 +681,37 @@
                                                                                 @if($drug_resistance->test_result->is_amplified)
                                                                                     @if($drug_resistance->decision == 'pending')
                                                                                     @else
-                                                                                    <b>Committee decison made on: {{ date('dS M Y', strtotime($drug_resistance->decision_date)) }}</b><br />
+                                                                                    <b>Committee decison made on: {{ date('dS M Y', strtotime($drug_resistance->decision_date)) }}</b>
+                                                                                    <br />
                                                                                     <span class="text-muted">
                                                                                         <b>Decision:</b> {{ $drug_resistance->decision }}<br />
-                                                                                        <b>Comment:</b> {{ $drug_resistance->decision_comment }}
+                                                                                        <b>Reason(s):</b> {{ $drug_resistance->regimen_change_reasons }}<br />
+                                                                                        <b>Comment:</b> {{ $drug_resistance->decision_comment }}<br /><br />
+                                                                                        <b>Regimen Started:</b> {{ $patient->patient_regimens->count() > 0 ? $patient->patient_regimens->first()->patient_regimen_id : "Not yet started on assigned regimen" }}
+                                                                                        <br><br>
+                                                                                    </span>
+                                                                                    <b><u>Clinician's recommendation</u></b><br>
+                                                                                    <span class="text-muted small">
+                                                                                        <b>Made on:</b> {{ date('dS M Y', strtotime($drug_resistance->suggestion_date)) }}<br>
+                                                                                        <b>Recommendation:</b> {{ $drug_resistance->suggested_by_clinician }}<br>
+                                                                                        <b>Comment:</b> {{ $drug_resistance->suggested_comment }}<br><br>
+                                                                                        Recommendation taken? <b>{{ ($drug_resistance->suggested_regimen == $drug_resistance->assigned_regimen_at_decision) ? 'Yes' : 'No' }}</b><br><br>
+                                                                                        <p>Score: 
+                                                                                        @if(!$drug_resistance->suggested_score)
+                                                                                            <b class="badge badge-info">Not yet scored.</b>
+                                                                                            <input type="number" min="0" max="100" name="" placeholder="Score this clinician between 0 and 100" style="width: 21%">
+                                                                                            <button type="submit" class="btn-success">Save</button>
+                                                                                        @else
+                                                                                            @if($drug_resistance->suggested_score > 79.99999)
+                                                                                                <b class="badge badge-success">
+                                                                                            @elseif($drug_resistance->suggested_score < 79.99999 && $drug_resistance->suggested_score > 49.9999)
+                                                                                                <b class="badge badge-warning">
+                                                                                            @else
+                                                                                                <b class="badge badge-danger">
+                                                                                            @endif
+                                                                                                {{ $drug_resistance->suggested_score }}</b>
+                                                                                        @endif
+                                                                                        </p>
                                                                                     </span>
                                                                                     @endif
                                                                                 @else
@@ -670,4 +740,21 @@
         </div>
     </div>
 </div>
-@endsection              
+
+<script src="../../assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#is_past_regimen').on('switchChange.bootstrapSwitch', function(event, state) {
+            if (state == true) {
+                $('#past_regimen_details').show();
+            }
+        });
+        $('#is_current_regimen').on('switchChange.bootstrapSwitch', function(event, state) {
+            if (state == true) {
+                $('#past_regimen_details').hide();
+            }
+        });
+    });
+</script>
+
+@endsection

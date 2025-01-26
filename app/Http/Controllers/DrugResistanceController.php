@@ -9,6 +9,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\DrugResistance;
 use App\Models\TestResult;
 use App\Models\ViralLoad;
+use Illuminate\Http\Request;
 
 class DrugResistanceController extends Controller
 {
@@ -16,22 +17,32 @@ class DrugResistanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $index_status = $request->query('status') ?? 'amplified';
         $drug_resistances = DrugResistance::withWhereHas('patient', function ($query) {
                                 $query->where('status', 'Alive and on treatment');
                             })
                             ->withWhereHas('viral_load', function ($query) {
                                 $query->where('vl_source', 'LIMS');
                             })
-                            ->withWhereHas('resistances', function ($query) {
-                                $query->where('drug_code', 'DTG');
+                            // ->withWhereHas('resistances', function ($query) {
+                            //     $query->where('drug_code', 'DTG');
+                            // })
+                            ->withWhereHas('test_result', function ($query) use($index_status) {
+                                if ($index_status == 'amplified') {
+                                    $query->where('is_amplified', 1);
+                                } else {
+                                    $query->where('is_amplified', 0);
+                                }
+                                
                             })
                             ->where('decision', 'pending')
+                            // ->groupBy('patient_id')
                             ->get();
-        $count_amplified = TestResult::where('is_amplified', 1)->count();
-        $count_failed_to_amplify = TestResult::where('is_amplified', 0)->count();
-        return view('drug_resistance.index', compact('drug_resistances', 'count_amplified', 'count_failed_to_amplify'));
+
+        $statuses = ['amplified', 'failed to amplify'];
+        return view('drug_resistance.index', compact('drug_resistances', 'statuses', 'index_status'));
     }
 
     /**

@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title ">
-                            Batch: &nbsp;&nbsp;{{ $batch->dr_lab->name }} / {{ date('d-M-Y', strtotime($batch->created_at)) }} / {{ date('d-M-Y', strtotime($batch->referral_date)) ?? 'OPEN' }}
+                            Batch: &nbsp;&nbsp;{{ $batch->dr_lab->name }} / {{ date('d-M-Y', strtotime($batch->created_at)) }} / {{ $batch->referral_date != NULL ? date('d-M-Y', strtotime($batch->referral_date)) : 'OPEN' }}
                         </h4>                        
                     </div>
                     <div class="card-body table-full-width">

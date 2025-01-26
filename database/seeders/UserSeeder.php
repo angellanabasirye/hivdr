@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $user_details = [
-            ['Admin User', 'admin@gmail.com', '$2y$12$1ZOgVHR3dCj0f5g.wURxxOIAnXCWYI6eYmw3yiyTWgn5Th31nbPsO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-04 16:33:30',  NULL, NULL],
+            ['Admin User', 'admin@gmail.com', '$2y$12$1ZOgVHR3dCj0f5g.wURxxOIAnXCWYI6eYmw3yiyTWgn5Th31nbPsO', NULL, 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-04 16:33:30',  NULL, NULL],
             ['John Doe', 'etwinomujuni@clintonhealthaccess.org', '$2y$10$zKJhhpM4pN3u7XyCkg.qZuHZ9L8J0O4qcNRzL4PV3/cL7KHTi0eOa', NULL, 'etwinomujuni@clintonhealthaccess.org', NULL, NULL, 1,  1,  NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-01-14 12:38:39',  NULL, '2023-02-21 12:16:05'],
             ['Proscovia Mbabazi ', 'pronam2000@gmail.com', '$2y$10$cIVrhgMWVF9u45FXiDewEuyIwyS/GJFsMxWWXJ8lbMvY71unNIvhm', NULL, 'pronam2000@gmail.com', NULL, NULL, 1,  1,  NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-09 11:23:30',  NULL, '2021-04-09 11:45:51'],
             ['Simon Peter Muwanguzi',  'smuwanguzi@musph.ac.ug', '$2y$10$ey74SKKZ0afY/TB8hhx8POmPPN6S10rd4LE6/lh0jSrHbNAc72VdS', NULL, 'smuwanguzi@musph.ac.ug', NULL, NULL, 1,  1,  NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-06 14:11:34',  NULL, '2023-04-05 12:32:50'],

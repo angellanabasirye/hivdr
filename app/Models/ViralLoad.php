@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DrugResistance;
 use App\Models\EligibleSample;
 use App\Models\Assessment;
 use App\Models\TestResult;
@@ -42,5 +43,10 @@ class ViralLoad extends Model
     public function assessments()
     {
         return $this->hasMany(Assessment::class, 'vl_id');
+    }
+
+    public function drug_resistance()
+    {
+        return $this->hasOne(DrugResistance::class, 'vl_id');
     }
 }

@@ -106,7 +106,12 @@ class Patient extends Model
 
     public function current_regimen()
     {
-        return $this->patient_regimens()->one()->whereDoesntHave('regimen_change');
+        return $this->patient_regimens()->one()->whereDoesntHave('regimen_change')->ofMany('created_at', 'max');
+    }
+
+    public function latest_regimen()
+    {
+        return $this->patient_regimens()->one()->ofMany('created_at', 'max');
     }
 
     public function regimen_changes()

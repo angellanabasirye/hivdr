@@ -13,7 +13,7 @@ class BatchController extends Controller
      */
     public function index()
     {
-        $batches = Batch::all();
+        $batches = Batch::orderBy('created_at', 'desc')->get();
         return view('batches.index', compact('batches'));
     }
 

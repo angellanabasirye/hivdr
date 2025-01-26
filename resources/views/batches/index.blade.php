@@ -34,7 +34,7 @@
                                     <td>{{ $batch->vl_lab->name }}</td>
                                     <td>
                                         <a href="{{ route('batches.show', array($batch->id)) }}">
-                                            {{ $batch->dr_lab->name }} / {{ date('d-M-Y', strtotime($batch->created_at)) }} / {{ date('d-M-Y', strtotime($batch->referral_date)) ?? 'OPEN' }}
+                                            {{ $batch->dr_lab->name }} / {{ date('d-M-Y', strtotime($batch->created_at)) }} / {{ $batch->referral_date != NULL ? date('d-M-Y', strtotime($batch->referral_date)) : 'OPEN' }}
                                         </a>
                                     </td>
                                     <td>{{ $batch->dr_lab->name }}</td>

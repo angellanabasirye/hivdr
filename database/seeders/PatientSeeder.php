@@ -24,16 +24,16 @@ class PatientSeeder extends Seeder
                     'id' => $data[0],
                     'art_number' => $data[1],
                     'facility_id' => $data[2],
-                    'birthdate' => $data[3] == 'NULL' ? NULL : Carbon::parse($data[3])->toDateString(),
+                    'birthdate' => empty($data[3]) ? NULL : Carbon::parse($data[3])->toDateString(),
                     'gender' => $data[4],
-                    'art_start_date' => $data[5] == 'NULL' ? NULL : Carbon::parse($data[5])->toDateString(),
+                    'art_start_date' => empty($data[5]) ? NULL : Carbon::parse($data[5])->toDateString(),
                     'status' => $data[6],
                     'is_backlog' => $data[7],
                     'created_by' => NULL, //$data[8],
                     'created_at' => $data[8],
                     'updated_at' => NULL, //$data[10],
                     'deleted_at' => NULL, //Carbon::parse($data[11])->toDateString(),
-                ]);    
+                ]);  
             }
             $firstline = false;
         }

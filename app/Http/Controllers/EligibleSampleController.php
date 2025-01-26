@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateEligibleSampleRequest;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\EligibleSample;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EligibleSampleController extends Controller
 {
@@ -16,11 +17,27 @@ class EligibleSampleController extends Controller
      */
     public function index()
     {
-        $eligible_samples = EligibleSample::with(['patient', 'facility.implementing_partner', 'test_result' => function(Builder $query) {
+        $samples = EligibleSample::with(['patient.latest_regimen', 'facility.implementing_partner', 'test_result' => function(Builder $query) {
                                 $query->whereNull('dr_id');
                             }])
+                            ->where('vl_source', 'LIMS')
                             ->whereNotNull('eligible_sample_no')
+                            ->whereNull('dr_rejection_reason')
+                            ->whereNull('dr_defer_reason')
+                            ->whereNull('batch_id')
+                            ->whereNull('accepted_at_dr')
                             ->get();
+        $e_samples = [];
+        foreach ($samples as $key => $sample) {
+            if ($sample->patient->latest_regimen->start_date == $sample->patient->art_start_date OR
+                    $sample->patient->latest_regimen->created_at == $sample->patient->created_at) 
+            {
+                $e_samples[] = $sample;
+            }
+        }
+        // dd($e_samples);
+        $eligible_samples = $samples->intersect($e_samples);
+        // dd($eligible_samples->count());
         return view('eligible_samples.index', compact('eligible_samples'));
     }
 
@@ -74,9 +91,11 @@ class EligibleSampleController extends Controller
 
     public function referrals_deferrals(Request $request, $index_status = null)
     {
-        $base_query = EligibleSample::with(['patient', 'facility.implementing_partner', 'test_result' => function(Builder $query) {
+        $base_query = EligibleSample::with(['patient', 'facility.implementing_partner'])
+                            ->withWhereHas('test_result', function ($query) {
                                 $query->whereNull('dr_id');
-                            }])
+                            })
+                            ->where('vl_source', 'LIMS')
                             ->whereNotNull('eligible_sample_no');
 
         if (!isset($index_status)) {
@@ -84,14 +103,14 @@ class EligibleSampleController extends Controller
         }
 
         if ($index_status == 'referred') {
-            $base_query = $base_query->whereNotNull('referred_to_dr_at');
+            $base_query = $base_query->whereNotNull('referred_to_dr_at')->where('accepted_at_dr', 1);
         } elseif ($index_status == 'deferred') {
-            $base_query = $base_query->whereNotNull('deferred_at');
+            $base_query  = $base_query->whereNotNull('dr_defer_reason');
         } elseif ($index_status == 'rejected') {
-            $base_query  = $base_query->whereNotNull('dr_rejection_reason');
+            $base_query = $base_query->whereNotNull('referred_to_dr_at')->whereNull('accepted_at_dr')->whereNull('dr_defer_reason');
         }
         
-        $eligible_samples = $base_query->get();
+        $eligible_samples = $base_query->orderBy('vl_test_date', 'desc')->get();
         $statuses = ['referred', 'deferred', 'rejected'];
         return view('referrals_deferrals.index', compact('eligible_samples', 'index_status', 'statuses'));
     }

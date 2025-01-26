@@ -15,11 +15,15 @@ class AssessmentController extends Controller
     public function index()
     {
         $assessments = Assessment::withWhereHas('patient', function (Builder $query) {
-                           $query->where('status', 'Alive and on treatment');
+                           $query->where('status', 'Alive and on treatment')
+                                ->withWhereHas('latest_drug_resistance', function (Builder $query_two) {
+                                    $query_two->where('decision', 'pending');
+                                })
+                                ->withWhereHas('latest_viral_load')
+                                ->with('facility.implementing_partner');
                        })
-                       ->with(['patient.facility.implementing_partner', 'patient.latest_viral_load'])
                        ->get();
-                       // dd($assessments);
+                       // dd($assessments->count());
         return view('assessments.index', compact('assessments'));
     }
 

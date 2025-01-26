@@ -21,6 +21,17 @@ class RegimenChange extends Model
         'comment',
     ];
 
+    const CHANGE_REASONS = [
+        1 => 'Clinical failure',
+        2 => 'Immunological failure',
+        3 => 'Virological failure',
+        4 => 'HIV Drug resistance',
+        5 => 'Toxicity/side effects',
+        6 => 'Due to new TB',
+        7 => 'New Drug available',
+        8 => 'Drug out of stock',
+    ];
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);

@@ -22,7 +22,7 @@
         <!-- <link href="../assets/css/demo.css" rel="stylesheet" /> -->
     </head>
 
-    <body class="sidebar-mini">
+    <body class="">
         <div class="wrapper">
             @include('layouts._partials._sidebar')  
             <div class="main-panel">

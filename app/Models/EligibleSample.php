@@ -69,4 +69,9 @@ class EligibleSample extends Model
     {
         return $this->belongsTo(Lab::class, 'assigned_dr_lab');
     }
+
+    public function viral_load()
+    {
+         return $this->hasOneThrough(ViralLoad::class, TestResult::class);
+    }
 }
