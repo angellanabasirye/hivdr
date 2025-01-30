@@ -75,7 +75,7 @@
     <script src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
     <!--  Full Calendar   -->
     <script src="../../assets/js/plugins/fullcalendar.min.js"></script>
-     <script type="text/javascript">
+    <script type="text/javascript">
 
             var $table = $('#bootstrap-table');
 
@@ -135,6 +135,7 @@
                     formatRecordsPerPage: function (pageNumber) {
                         return pageNumber + " rows visible";
                     },
+                    iconSize: 'sm',
                     icons: {
                         refresh: 'fa fa-refresh',
                         toggle: 'fa fa-th-list',

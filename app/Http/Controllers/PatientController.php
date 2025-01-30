@@ -8,16 +8,19 @@ use App\Models\RegimenChange;
 use App\Models\Resistance;
 use App\Models\PssIssue;
 use App\Models\Patient;
+use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $index_category = $request->query('category') ?? 'all patients';
         $patients = Patient::all();
-        return view('patients.index', compact('patients'));
+        $categories = ['all patients', 'old data', 'out of care', 'transfers'];
+        return view('patients.index', compact('patients', 'categories', 'index_category'));
     }
 
     /**

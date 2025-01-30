@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use App\Models\ImplementingPartner;
+use App\Models\Facility;
+use App\Models\Hub;
 
 class User extends Authenticatable
 {
@@ -57,5 +60,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function facility()
+    {
+        return $this->belongsTo(Facility::class);
+    }
+
+    public function hub()
+    {
+        return $this->belongsTo(Hub::class);
+    }
+
+    public function implementing_partner()
+    {
+        return $this->belongsTo(ImplementingPartner::class);
     }
 }

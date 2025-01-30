@@ -231,38 +231,40 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="card bootstrap-table">
+                                                    <div class="card">
                                                         <div class="card-body">
-                                                            <table id="table" class="table text-left" >
-                                                                <thead>                                                                             
-                                                                    <th data-field="artline" style="padding-left: 10px;">ART Line</th>
-                                                                    <th data-field="duration">Duration</th>
-                                                                    <th data-field="regimen">Regimen</th>
-                                                                    <th data-field="startdate" data-sortable="true">Start date</th>
-                                                                    <th data-field="stopdate" data-sortable="true">Stop date</th>
-                                                                    <th data-field="vlcopies">Why regimen was stopped</th>
-                                                                    <th data-field="actions" class="td-actions ">Actions</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($patient->patient_regimens as $p_regimen)
-                                                                    <tr>
-                                                                        <td>{{ $p_regimen->regimen_old->treatment_line }}</td>
-                                                                        <td>
-                                                                            {{ $p_regimen->regimen_duration() ?? 'update ART history' }}
-                                                                        </td>
-                                                                        <td>{{ $p_regimen->regimen_old->regimen_name }}</td>
-                                                                        <td>
-                                                                            {{ $p_regimen->start_date ? date('dS M Y', strtotime($p_regimen->start_date)) : 'update ART history' }}
-                                                                        </td>
-                                                                        <td>
-                                                                            {{ $p_regimen->start_date ? ($p_regimen->stop_date ? date('dS M Y', strtotime($p_regimen->stop_date)) : 'current regimen') : '' }}
-                                                                        </td>
-                                                                        <td>{{ $p_regimen->regimen_change()->reasons ?? '' }} {{ $p_regimen->regimen_change()->comment ?? '' }}</td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
+                                                            <div class="table-responsive table-full-width">
+                                                                <table id="table" class="table table-striped" >
+                                                                    <thead>                                                                             
+                                                                        <th data-field="artline">ART Line</th>
+                                                                        <th data-field="duration">Duration</th>
+                                                                        <th data-field="regimen">Regimen</th>
+                                                                        <th data-field="startdate" data-sortable="true">Start date</th>
+                                                                        <th data-field="stopdate" data-sortable="true">Stop date</th>
+                                                                        <th data-field="vlcopies">Why regimen was stopped</th>
+                                                                        <th data-field="actions" class="td-actions ">Actions</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach($patient->patient_regimens as $p_regimen)
+                                                                        <tr>
+                                                                            <td>{{ $p_regimen->regimen_old->treatment_line }}</td>
+                                                                            <td>
+                                                                                {{ $p_regimen->regimen_duration() ?? 'update ART history' }}
+                                                                            </td>
+                                                                            <td>{{ $p_regimen->regimen_old->regimen_name }}</td>
+                                                                            <td>
+                                                                                {{ $p_regimen->start_date ? date('dS M Y', strtotime($p_regimen->start_date)) : 'update ART history' }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $p_regimen->start_date ? ($p_regimen->stop_date ? date('dS M Y', strtotime($p_regimen->stop_date)) : 'current regimen') : '' }}
+                                                                            </td>
+                                                                            <td>{{ $p_regimen->regimen_change()->reasons ?? '' }} {{ $p_regimen->regimen_change()->comment ?? '' }}</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>                                                                
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -285,24 +287,26 @@
                                         </h3>
                                     </div>
                                     <div class="panel-body">
-                                        <div class="container-fluid">                                 
+                                        <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="card bootstrap-table">
-                                                        <div class="card-body table-full-width">
-                                                            <table id="table" class="table text-left" >
-                                                                <tbody>
-                                                                    @foreach($patient->social_profiles as $profile)
-                                                                        <tr>
-                                                                            <td style="width: 100px;">
-                                                                                {{ date('dS M Y', strtotime($profile->profile_date)) }}
-                                                                            </td>
-                                                                            <td>{{ $profile->profile }}</td>
-                                                                            <td>actions</td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive table-full-width">
+                                                                <table id="table" class="table table-striped" >
+                                                                    <tbody>
+                                                                        @foreach($patient->social_profiles as $profile)
+                                                                            <tr>
+                                                                                <td style="width: 100px;">
+                                                                                    {{ date('dS M Y', strtotime($profile->profile_date)) }}
+                                                                                </td>
+                                                                                <td>{{ $profile->profile }}</td>
+                                                                                <td>actions</td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>                                                            
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -328,33 +332,36 @@
                                         <div class="container-fluid">                                 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="card bootstrap-table">
-                                                        <div class="card-body table-full-width">
-                                                            <table id="table" class="table text-left" >
-                                                                <thead>                                                                             
-                                                                    <th data-field="sample_collection_date">Date Sample Collected</th>
-                                                                    <th data-field="vl_test_date">Test Date</th>
-                                                                    <th data-field="regimen_at_vl">Regimen at time of VL</th>
-                                                                    <th data-field="art_line_at_vl">ART Line at time of VL</th>
-                                                                    <th data-field="vl_copies">Viral Load (copies/ml)</th>
-                                                                    <th data-field="actions" class="td-actions ">Actions</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($patient->vl_test_results as $vl)
-                                                                        <tr>
-                                                                            <td>
-                                                                                {{ $vl->date_collected ? date('dS M Y', strtotime($vl->date_collected)) : '' }}
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $vl->vl_test_date ? date('dS M Y', strtotime($vl->vl_test_date)) : '' }}
-                                                                            </td>
-                                                                            <td>{{ $patient->regimen }}</td>
-                                                                            <td>{{ $patient->treatment_line }}</td>
-                                                                            <td>{{ $vl->vl_copies == 1 ? 'Not detectable' : $vl->vl_copies }}</td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive table-full-width">
+                                                                <table id="table" class="table table-striped" >
+                                                                    <thead>                                                                             
+                                                                        <th data-field="sample_collection_date">Date Sample Collected</th>
+                                                                        <th data-field="vl_test_date">Test Date</th>
+                                                                        <th data-field="regimen_at_vl">Regimen at time of VL</th>
+                                                                        <th data-field="art_line_at_vl">ART Line at time of VL</th>
+                                                                        <th data-field="vl_copies">Viral Load (copies/ml)</th>
+                                                                        <th data-field="actions" class="td-actions ">Actions</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach($patient->vl_test_results as $vl)
+                                                                            <tr>
+                                                                                <td>
+                                                                                    {{ $vl->date_collected ? date('dS M Y', strtotime($vl->date_collected)) : '' }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{ $vl->vl_test_date ? date('dS M Y', strtotime($vl->vl_test_date)) : '' }}
+                                                                                </td>
+                                                                                <td>{{ $patient->regimen }}</td>
+                                                                                <td>{{ $patient->treatment_line }}</td>
+                                                                                <td>{{ $vl->vl_copies == 1 ? 'Not detectable' : $vl->vl_copies }}</td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -386,42 +393,44 @@
                                                         </div>
                                                     @else
                                                         <div class="card">
-                                                            <div class="card-body table-full-width">
-                                                                <table id="table" class="table text-left" >
-                                                                    <thead>                                                                             
-                                                                        <th data-field="iac_date" style="width: 90px;">IAC Date</th>
-                                                                        <th data-field="pss_issues">Adherence Barries</th>
-                                                                        <th data-field="action_taken">Action Taken / Pyschological Support Provided</th>
-                                                                        <th data-field="adherence_score" data-sortable="true" style="width: 150px">Adherence Score</th>
-                                                                        <th data-field="actions" class="td-actions ">Actions</th>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach($patient->iacs as $iac)
-                                                                            <tr>
-                                                                                <td>{{ $iac->iac_date }}</td>
-                                                                                <td>
-                                                                                    @foreach($pss_issues as $pss_issue)
-                                                                                        @foreach(explode(",", $iac->pss_issues) as $issue)
-                                                                                            @if($pss_issue->id == $issue)
-                                                                                                {{ $pss_issue->issue }}<br>
-                                                                                            @endif
+                                                            <div class="card-body">
+                                                                <div class="table-responsive table-full-width">
+                                                                    <table id="table" class="table table-striped" >
+                                                                        <thead>                                                                             
+                                                                            <th data-field="iac_date" style="width: 90px;">IAC Date</th>
+                                                                            <th data-field="pss_issues">Adherence Barries</th>
+                                                                            <th data-field="action_taken">Action Taken / Pyschological Support Provided</th>
+                                                                            <th data-field="adherence_score" data-sortable="true" style="width: 150px">Adherence Score</th>
+                                                                            <th data-field="actions" class="td-actions ">Actions</th>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach($patient->iacs as $iac)
+                                                                                <tr>
+                                                                                    <td>{{ $iac->iac_date }}</td>
+                                                                                    <td>
+                                                                                        @foreach($pss_issues as $pss_issue)
+                                                                                            @foreach(explode(",", $iac->pss_issues) as $issue)
+                                                                                                @if($pss_issue->id == $issue)
+                                                                                                    {{ $pss_issue->issue }}<br>
+                                                                                                @endif
+                                                                                            @endforeach
                                                                                         @endforeach
-                                                                                    @endforeach
-                                                                                    @if($iac->other_issues)
-                                                                                        OTHER ISSUES:{{ $iac->other_issues }}
-                                                                                    @endif
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{ $iac->action_taken }}
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{ $iac->adherence_score }}
-                                                                                </td>
-                                                                                <td>action here..</td>
-                                                                            </tr>
-                                                                        @endforeach
-                                                                    </tbody>
-                                                                </table>
+                                                                                        @if($iac->other_issues)
+                                                                                            OTHER ISSUES:{{ $iac->other_issues }}
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ $iac->action_taken }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{ $iac->adherence_score }}
+                                                                                    </td>
+                                                                                    <td>action here..</td>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     @endif
@@ -453,38 +462,40 @@
                                                             <span><i>No records for assessment found</i></span>
                                                         </div>
                                                     @else
-                                                        <div class="card bootstrap-table">
-                                                            <div class="card-body table-full-width">
-                                                                <table id="table" class="table text-left" >
-                                                                    <thead>                                                                             
-                                                                        <th data-field="iac_date">Assessment Date</th>
-                                                                        @foreach($patient->assessments as $assessment)
-                                                                            <th>{{ date('dS M Y', strtotime($assessment->assessment_date)) }}</th>
-                                                                        @endforeach
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach($assessment_headers as $thead => $tvalue)
-                                                                        <tr>
-                                                                            <th>{{ $thead }}</th>
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive table-full-width">
+                                                                    <table id="table" class="table table-striped">
+                                                                        <thead>                                                                             
+                                                                            <th data-field="iac_date">Assessment Date</th>
                                                                             @foreach($patient->assessments as $assessment)
-                                                                                @if($thead == 'CD4 Date' || $thead == 'CrAg Date' || $thead == 'TBLAM Date' || $thead == 'Date Weight/MUAC taken' || $thead == 'Date Added')
-                                                                                    <td>
-                                                                                        {{ date('dS M Y', strtotime($assessment->$tvalue)) }}
-                                                                                    </td>
-                                                                                @elseif($thead == 'Recent VL Date')
-                                                                                    <td>
-                                                                                        {{ date('dS M Y', strtotime($assessment->viral_load->vl_test_date)) }}
-                                                                                    </td>
-                                                                                @elseif($thead == 'VL Copies')
-                                                                                    <td>{{ $assessment->viral_load->vl_copies }}</td>
-                                                                                @else
-                                                                                    <td>{{ $assessment->$tvalue }}</td>
-                                                                                @endif
+                                                                                <th>{{ date('dS M Y', strtotime($assessment->assessment_date)) }}</th>
                                                                             @endforeach
-                                                                        </tr>
-                                                                        @endforeach
-                                                                    </tbody>
-                                                                </table>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach($assessment_headers as $thead => $tvalue)
+                                                                            <tr>
+                                                                                <th>{{ $thead }}</th>
+                                                                                @foreach($patient->assessments as $assessment)
+                                                                                    @if($thead == 'CD4 Date' || $thead == 'CrAg Date' || $thead == 'TBLAM Date' || $thead == 'Date Weight/MUAC taken' || $thead == 'Date Added')
+                                                                                        <td>
+                                                                                            {{ date('dS M Y', strtotime($assessment->$tvalue)) }}
+                                                                                        </td>
+                                                                                    @elseif($thead == 'Recent VL Date')
+                                                                                        <td>
+                                                                                            {{ date('dS M Y', strtotime($assessment->viral_load->vl_test_date)) }}
+                                                                                        </td>
+                                                                                    @elseif($thead == 'VL Copies')
+                                                                                        <td>{{ $assessment->viral_load->vl_copies }}</td>
+                                                                                    @else
+                                                                                        <td>{{ $assessment->$tvalue }}</td>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </tr>
+                                                                            @endforeach
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     @endif

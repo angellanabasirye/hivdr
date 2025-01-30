@@ -65,10 +65,29 @@ Tip 2: you can also add an image using data-image tag
                 </div>
             </li>  
             <li class="nav-item ">
-                <a class="nav-link" href="/drug_resistance">
+                <a class="nav-link" data-toggle="collapse" href="#tablesExamples4">
                     <i class="nc-icon nc-notes"></i>
-                    <p> HIV-DR Results</p>
+                    <p>
+                        HIV-DR Results
+                        <b class="caret"></b>
+                    </p>
                 </a>
+                <div class="collapse " id="tablesExamples4">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/drug_resistance?status=amplified">
+                                <span class="sidebar-mini">A</span>
+                                <span class="sidebar-normal">Amplified</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/drug_resistance?status=failed to amplify">
+                                <span class="sidebar-mini">FA</span>
+                                <span class="sidebar-normal">Failed to amplify</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
             <li class="nav-item ">
@@ -166,7 +185,7 @@ Tip 2: you can also add an image using data-image tag
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" href=@{{ route('dashboard.index') }}>
+                <a class="nav-link" href="/users">
                     <i class="nc-icon nc-circle-09"></i>
                     <p>User management</p>
                 </a>

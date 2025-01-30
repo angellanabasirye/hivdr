@@ -23,7 +23,6 @@ class AssessmentController extends Controller
                                 ->with('facility.implementing_partner');
                        })
                        ->get();
-                       // dd($assessments->count());
         return view('assessments.index', compact('assessments'));
     }
 

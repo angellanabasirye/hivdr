@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('assessments', App\Http\Controllers\AssessmentController::class);
     Route::get('/referrals_deferrals/{status}', [App\Http\Controllers\EligibleSampleController::class, 'referrals_deferrals']);
     Route::get('/discussed', [App\Http\Controllers\DrugResistanceController::class, 'discussed']);
+    Route::resource('users', App\Http\Controllers\UserController::class);
 });
 
 require __DIR__.'/auth.php';
