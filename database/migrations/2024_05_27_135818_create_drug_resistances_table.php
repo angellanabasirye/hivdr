@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('reviewer_level')->nullable();
             $table->bigInteger('reviewer_id')->unsigned()->nullable();
             $table->string('assigned_regimen_at_decision')->nullable();
-            $table->string('art_no_after_regimen_start')->nullable();
+            $table->bigInteger('patient_regimen_id_after_regimen_start')->nullable();
             $table->text('decision_comment')->nullable();
             $table->string('regimen_change_reasons')->nullable();
             $table->boolean('facility_notified_no_switch')->nullable();

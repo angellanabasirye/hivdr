@@ -59,7 +59,7 @@
                                             {{ $dr->resistances->first()->resistance_level ?? "-NA" }}
                                         </td>
                                         <td>
-                                            {{ empty($dr->test_result->rtpr_or_inti) || $dr->test_result->rtpr_or_inti == null ? 'No' : 'Yes' }}
+                                            {{ empty($dr->test_result->rtpr_or_inti) || $dr->test_result->rtpr_or_inti == null ? 'No' : 'Yes ('.$dr->viral_load->drug_resistances_count.' received)' }}
                                         </td>
                                         <td>                                        
                                             <a class="btn btn-social btn-primary btn-round view_profile" id="view-{{ $dr->patient_id}}-link"

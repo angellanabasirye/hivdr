@@ -24,11 +24,12 @@ class DrugResistanceController extends Controller
                                 $query->where('status', 'Alive and on treatment');
                             })
                             ->withWhereHas('viral_load', function ($query) {
-                                $query->where('vl_source', 'LIMS');
+                                $query->where('vl_source', 'LIMS')
+                                    ->withCount('drug_resistances');
                             })
-                            // ->withWhereHas('resistances', function ($query) {
-                            //     $query->where('drug_code', 'DTG');
-                            // })
+                            ->with('resistances', function ($query) {
+                                $query->where('drug_code', 'DTG');
+                            })
                             ->withWhereHas('test_result', function ($query) use($index_status) {
                                 if ($index_status == 'amplified') {
                                     $query->where('is_amplified', 1);
@@ -38,7 +39,7 @@ class DrugResistanceController extends Controller
                                 
                             })
                             ->where('decision', 'pending')
-                            // ->groupBy('patient_id')
+                            ->groupBy('vl_id')
                             ->get();
 
         $statuses = ['amplified', 'failed to amplify'];
@@ -96,16 +97,24 @@ class DrugResistanceController extends Controller
     public function discussed()
     {
         $drug_resistances = DrugResistance::withWhereHas('patient', function ($query) {
-                                $query->where('status', 'Alive and on treatment');
+                                $query->where('status', 'Alive and on treatment')
+                                      ->withWhereHas('patient_regimens', function ($query) {
+                                          $query->whereNotNull('start_date');
+                                      });
                             })
                             ->withWhereHas('viral_load', function ($query) {
                                 $query->where('vl_source', 'LIMS');
                             })
-                            ->withWhereHas('resistances', function ($query) {
-                                $query->where('drug_code', 'DTG');
+                            ->where(function (Builder $query) {
+                                $query->where('decision', 'LIKE', 'Maintained%')
+                                    ->where('facility_notified_no_switch', '=', 1)
+                                    ->orWhere('decision', 'LIKE', 'S%') // switched or substituted
+                                    ->whereNull('patient_regimen_id_after_regimen_start')
+                                    ->whereNotNull('assigned_regimen_at_decision');
                             })
-                            ->where('decision', '<>', 'pending')
+                            ->groupBy('patient_id')
                             ->get();
+        
         return view('drug_resistance.discussed', compact('drug_resistances'));
     }
 }

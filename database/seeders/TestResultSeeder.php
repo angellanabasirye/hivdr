@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\EligibleSample;
+use App\Models\DrugResistance;
 use App\Models\TestResult;
+use App\Models\ViralLoad;
 use Carbon\Carbon;
 use App\Helpers\ArrayHelpers;
 
@@ -27,7 +29,7 @@ class TestResultSeeder extends Seeder
         $generateRow = function($row) {
             return [
                 'patient_id' => $row[2],
-                'eligible_sample_id' => ArrayHelpers::getIdFromList($row[3], $this->sample_ids),
+                'eligible_sample_id' => ArrayHelpers::getIdFromList($row[4], $this->sample_ids),
                 'vl_id' => $row[0], // viral load test id that prompted the drug resistance test
                 'vl_lab_id' => $row[6],
                 'vl_copies' => $row[9],
@@ -51,6 +53,22 @@ class TestResultSeeder extends Seeder
 
         foreach (ArrayHelpers::chunkFile($path, $generateRow, 1000) as $chunk) {
             TestResult::Insert($chunk);
+        }
+
+        // update EligibleSample, ViralLoad and DrugResistance with test_result_id
+        foreach (TestResult::all() as $test_result) {
+            $eligible_sample = EligibleSample::find($test_result->eligible_sample_id);
+            if ($eligible_sample) {
+                $eligible_sample->update(['test_result_id' => $test_result->id]);
+                // viral load update
+                $viral_load = ViralLoad::where('eligible_sample_id', $eligible_sample->id)->first();
+                $viral_load->update(['test_result_id' => $test_result->id]);
+                // Drug Resistance update
+                $drug_resistance = DrugResistance::where('vl_id', $viral_load->id)->first();
+                if ($drug_resistance) {
+                    $drug_resistance->update(['test_result_id' => $test_result->id]);
+                }
+            }
         }
 
         // $csvFile = fopen(base_path("database/data/patientvl_dr_test_results.csv"), "r");

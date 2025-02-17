@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Helpers\EncryptDecrypt;
 
 class UserController extends Controller
 {
@@ -13,6 +14,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $decrypt = new EncryptDecrypt('@ochero');
+        dd($decrypt->decrypt('UFE4i3TId8FVH5adDybaiEJKelJvU2lLYmc9PQ=='));
         return view('users.index', compact('users'));
     }
 

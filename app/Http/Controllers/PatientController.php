@@ -18,8 +18,8 @@ class PatientController extends Controller
     public function index(Request $request)
     {
         $index_category = $request->query('category') ?? 'all patients';
-        $patients = Patient::all();
-        $categories = ['all patients', 'old data', 'out of care', 'transfers'];
+        $patients       = Patient::with('facility.user')->get();
+        $categories     = ['all patients', 'old data', 'out of care', 'transfers'];
         return view('patients.index', compact('patients', 'categories', 'index_category'));
     }
 

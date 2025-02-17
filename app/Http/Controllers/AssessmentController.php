@@ -18,6 +18,7 @@ class AssessmentController extends Controller
                            $query->where('status', 'Alive and on treatment')
                                 ->withWhereHas('latest_drug_resistance', function (Builder $query_two) {
                                     $query_two->where('decision', 'pending');
+                                            // ->whereNotNull('patient_regimen_id_after_regimen_start')
                                 })
                                 ->withWhereHas('latest_viral_load')
                                 ->with('facility.implementing_partner');

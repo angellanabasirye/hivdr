@@ -34,7 +34,7 @@ class DrugResistance extends Model
         'reviewer_level',
         'reviewer_id',
         'assigned_regimen_at_decision',
-        'art_no_after_regimen_start',
+        'patient_regimen_id_after_regimen_start',
         'decision_comment',
         'regimen_change_reasons',
         'facility_notified_no_switch',

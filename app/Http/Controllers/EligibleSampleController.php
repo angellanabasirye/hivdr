@@ -17,7 +17,7 @@ class EligibleSampleController extends Controller
      */
     public function index()
     {
-        $samples = EligibleSample::with(['patient.latest_regimen', 'facility.implementing_partner', 'test_result' => function(Builder $query) {
+        $eligible_samples = EligibleSample::with(['patient.latest_regimen', 'facility.implementing_partner', 'test_result' => function(Builder $query) {
                                 $query->whereNull('dr_id');
                             }])
                             ->where('vl_source', 'LIMS')
@@ -27,17 +27,7 @@ class EligibleSampleController extends Controller
                             ->whereNull('batch_id')
                             ->whereNull('accepted_at_dr')
                             ->get();
-        $e_samples = [];
-        foreach ($samples as $key => $sample) {
-            if ($sample->patient->latest_regimen->start_date == $sample->patient->art_start_date OR
-                    $sample->patient->latest_regimen->created_at == $sample->patient->created_at) 
-            {
-                $e_samples[] = $sample;
-            }
-        }
-        // dd($e_samples);
-        $eligible_samples = $samples->intersect($e_samples);
-        // dd($eligible_samples->count());
+        
         return view('eligible_samples.index', compact('eligible_samples'));
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ImplementingPartner;
 use App\Models\Distirct;
 use App\Models\Patient;
+use App\Models\User;
 use App\Models\Hub;
 
 class Facility extends Model
@@ -65,5 +66,10 @@ class Facility extends Model
     public function patients()
     {
         return $this->hasMany(Patient::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
     }
 }

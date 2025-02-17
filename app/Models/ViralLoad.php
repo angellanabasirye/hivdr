@@ -45,8 +45,8 @@ class ViralLoad extends Model
         return $this->hasMany(Assessment::class, 'vl_id');
     }
 
-    public function drug_resistance()
+    public function drug_resistances()
     {
-        return $this->hasOne(DrugResistance::class, 'vl_id');
+        return $this->hasMany(DrugResistance::class, 'vl_id');
     }
 }
