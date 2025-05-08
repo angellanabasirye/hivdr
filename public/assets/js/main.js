@@ -125,7 +125,7 @@ $(function () {
     var data = {
       labels: ['Eligible for DRT', 'Referred for DRT', 'Received results', 'Amplified', 'Reviewed', 'Maintained', 'Switched', 'Substituted', 'Started on ART'],
       series: [
-        [542, 443, 320, 780, 553, 453, 326, 434, 568]
+        [count_eligible_samples, count_referred_samples, count_received_results, count_amplified_results, count_cases_discussed, count_cases_maintained, count_cases_switched, count_cases_substituted, count_started_art]
 
       ]
     };
@@ -138,6 +138,7 @@ $(function () {
         },
         axisY: {
             scaleMinSpace: 25,
+            offset: 50,
         },
         height: "400px",
         plugins: [

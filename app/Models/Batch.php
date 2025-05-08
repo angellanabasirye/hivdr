@@ -34,4 +34,9 @@ class Batch extends Model
     {
         return $this->hasMany(EligibleSample::class);
     }
+
+    public static function get_open_batch()
+    {
+        return self::whereNull('referral_date')->first();
+    }
 }

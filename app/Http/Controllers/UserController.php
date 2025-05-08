@@ -14,8 +14,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        $decrypt = new EncryptDecrypt('@ochero');
-        dd($decrypt->decrypt('UFE4i3TId8FVH5adDybaiEJKelJvU2lLYmc9PQ=='));
+        // $decrypt = new EncryptDecrypt('@ochero');
+        // dd($decrypt->decrypt('UFE4i3TId8FVH5adDybaiEJKelJvU2lLYmc9PQ=='));
         return view('users.index', compact('users'));
     }
 

@@ -47,7 +47,7 @@
                                         <td>{{ $patient->facility->name ?? 'empty'}}</td>                            
                                         <td>
                                             {{ $patient->art_number }}
-                                            {!-- new \App\Helpers\EncryptDecrypt($patient->facility->user->username)->decrypt($patient->art_number) --!}
+                                            {{-- new \App\Helpers\EncryptDecrypt($patient->facility->user->username)->decrypt($patient->art_number) --}}
                                         </td>
                                         <td>{{ $patient->get_age() }}</td>
                                         <td>{{ $patient->phone }}</td>

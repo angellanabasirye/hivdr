@@ -8,9 +8,9 @@ Route::get('/', function () {
     // return view('welcome');
 });
 
-Route::get('/dash', function () {
-    return view('dash');
-})->name('dash');
+// Route::get('/dash', function () {
+//     return view('dash');
+// })->name('dash');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dash', [App\Http\Controllers\HomeController::class, 'index'])->name('dash');
+    Route::post('/get_sample_profile_summary', [App\Http\Controllers\HomeController::class, 'getSampleProfileSummary'])->name('sp_summary');
     Route::resource('patients', App\Http\Controllers\PatientController::class);
     Route::resource('eligible_samples', App\Http\Controllers\EligibleSampleController::class);
     Route::resource('batches', App\Http\Controllers\BatchController::class);
@@ -34,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/referrals_deferrals/{status}', [App\Http\Controllers\EligibleSampleController::class, 'referrals_deferrals']);
     Route::get('/discussed', [App\Http\Controllers\DrugResistanceController::class, 'discussed']);
     Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::get('/eligible_samples/{eligible_sample}/remove_from_batch', [App\Http\Controllers\EligibleSampleController::class, 'remove_from_batch']);
+    Route::post('/eligible_samples/{eligible_sample}/refer_or_defer', [App\Http\Controllers\EligibleSampleController::class, 'refer_or_defer']);
 });
 
 require __DIR__.'/auth.php';

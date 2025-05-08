@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="table-responsive table-full-width">
-                            <table id="bootstrap-table" class="table-sm table-hover table-striped">
+                            <table id="bootstrap-table" class="table table-hover table-striped">
                                 <thead>
                                     <th data-field="facility_id" data-sortable="true">Facility</th>
                                     <th data-field="ip" data-sortable="true">IP</th>

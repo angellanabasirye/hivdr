@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionSeeder::class);
         $this->call(ImplementingPartnerSeeder::class);
         $this->call(ClusterSeeder::class);
-        $this->call(RegionSeeder::class);
         $this->call(DistrictSeeder::class);
         $this->call(HubSeeder::class);
         $this->call(LabSeeder::class);

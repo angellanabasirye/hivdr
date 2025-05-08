@@ -25,7 +25,7 @@ class BatchSeeder extends Seeder
                     'vl_lab_id' => Lab::where('name', $data[1])->first()->id,
                     'dr_lab_id' => Lab::where('name', $data[2])->first()->id,
                     'created_at' => Carbon::parse($data[3])->toDateTimeString(),
-                    'referral_date' => Carbon::parse($data[4])->toDateString(),
+                    'referral_date' => empty($data[4]) ? NULL : Carbon::parse($data[4])->toDateString(),
                 ]);
             }
             $firstline = false;

@@ -10,7 +10,13 @@
                     <div class="card-header">
                         <h4 class="card-title ">
                             Batch: &nbsp;&nbsp;{{ $batch->dr_lab->name }} / {{ date('d-M-Y', strtotime($batch->created_at)) }} / {{ $batch->referral_date != NULL ? date('d-M-Y', strtotime($batch->referral_date)) : 'OPEN' }}
-                        </h4>                        
+                        </h4>
+                        @if($batch->referral_date == NULL)
+                            <span class="pull-right" style="margin-top: -30px">
+                                <a href="" class="btn btn-sm btn-success" data-toggle='modal' data-target='#batchReferral'>Refer to DR Lab</a>&nbsp;&nbsp;
+                                <a href="" class="btn btn-sm btn-info">Change DR Lab</a>                                
+                            </span>
+                        @endif
                     </div>
                     <div class="card-body">
                         <div class="toolbar">
@@ -54,7 +60,7 @@
                                         <td>{{ $sample->dr_lab->name }}</td>
                                         <td>
                                             @if(!$batch->referral_date)
-                                                <a href="#">Remove from Batch</a>
+                                                <a href="/eligible_samples/{{$sample->id}}/remove_from_batch">Remove from Batch</a>
                                             @elseif($sample->accepted_at_dr)
                                                 <span class='text-muted small'>Referred to {{ $sample->dr_lab->name }}<small> -{{ date('dS M Y', strtotime($sample->referred_to_dr_at)) }}</small></span>
                                             @elseif(!$sample->accepted_at_dr)

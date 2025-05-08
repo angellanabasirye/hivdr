@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ImplementingPartner;
+use App\Models\EligibleSample;
 use App\Models\Distirct;
 use App\Models\Patient;
 use App\Models\User;
@@ -48,6 +49,8 @@ class Facility extends Model
         'created_by',
     ];
 
+    protected $with = ['user'];
+
     public function district()
     {
         return $this->belongsTo(District::class);
@@ -71,5 +74,10 @@ class Facility extends Model
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function eligible_samples()
+    {
+        return $this->hasMany(EligibleSample::class);
     }
 }
